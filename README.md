@@ -5,8 +5,8 @@ Projecte intermodular ASIX2 · Institut Tecnològic de Barcelona · Grup G03
 ## Equip
 | Membre | Rol |
 |---|---|
-| V. ... | Xarxa i router |
-| A. ... | Base de dades |
+| Victor Barreda | Xarxa i router |
+| Adam Ben Mansor | Base de dades |
 | Marc Balastegui | Repositori, plantilla Linux, DNS/DHCP |
 
 ## Arquitectura
