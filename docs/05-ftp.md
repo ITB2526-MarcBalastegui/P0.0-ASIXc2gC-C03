@@ -105,7 +105,7 @@ Les decisions (fitxer per interfície, identificació per MAC, MTU 1446) i l'inc
 |---|---|---|
 | `ip a` | Per veure la IP que hem configurat de la interfície de xarxa del router | `10.3.1.10/24` a la ITB13 |
 | `ip route` | Per veure les rutes de xarxa i comprovar que hi ha ruta cap al Router | `default` per la Default i `10.3.1.0/24` per la ITB13  |
-| `curl -I http://archive.ubuntu.com` | Respon | |
-| `ping -c 3 10.3.1.20` | Resposta | |
+| `curl -I http://archive.ubuntu.com` | Comprovar que hi ha sortida a Internet  | `HTTP(...)`,Respon |
+| `ping -c 3 10.3.1.20` | Comprovar que hi ha resposta cap a la màquina W-N01 |  `64 bytes(...)`, Hi ha connectivitat |
 
 ---
