@@ -139,13 +139,13 @@ sudo netplan try
  
 ![Configuració base](img/w-n01-base.png)
  
-| Prova | Ordre | Esperat | Resultat |
-|---|---|---|---|
-| Hostname | `hostname` | `W-N01` | |
-| Zona horària | `timedatectl` | `Europe/Madrid` | |
-| bchecker amb sudo | `id bchecker` | grup `sudo` | |
-| SSH accepta contrasenya | `sudo sshd -T \| grep -i passwordauthentication` | `yes` | |
-| Accés SSH amb bchecker | `ssh bchecker@localhost` | Entra | |
+| Ordre | Perquè | Resultat |
+|---|---|---|
+| `hostname` | Per comprovar el Hostname | `F-N01` |
+| `timedatectl \ grep "Time zone"` | Per comprovar que la zona horària és la correcta | `Europe/Madrid` |
+| `id bchecker` | Per comprovar els grups pertinents a l'usuari | `groups=1001(bchecker),27(sudo)` |
+| `sudo sshd -T \ grep -i passwordauthentication` | Per comprovar que SSH accepta contrasenya i usuari | `yes` |
+| `ssh bchecker@localhost` | Per veure que entra per SSH | `Welcome to Ubuntu (...)`|
  
 ![Xarxa](img/w-n01-xarxa.png)
  
