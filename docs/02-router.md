@@ -29,7 +29,7 @@ S'han apuntat les adreces MAC perquè dins del sistema les interfícies es diuen
 
 ![Isard Xarxa](img/fig01-isard-xarxes-r-n01.png)
 
-[*Configuració de recursos i xarxes de l'escriptori R-N01 a IsardVDI.*]
+*Configuració de recursos i xarxes de l'escriptori R-N01 a IsardVDI.*
 
 ## 2. Configuració base
 
@@ -165,7 +165,9 @@ sudo sysctl --system
 sysctl net.ipv4.ip_forward
 ```
 
-**Figura 8** · `docs/img/fig08-ip-forwarding.png`
+**Figura 8** · 
+
+![Fig08](img/fig08-ip-forwarding.png)
 
 *Aplicació del reenviament de paquets i valor de `net.ipv4.ip_forward`.*
 
@@ -194,6 +196,8 @@ sudo iptables -t nat -L POSTROUTING -n -v
 
 Durant la configuració, el comptador es va mantenir a 0 mentre W-N01 tenia encara la ruta per defecte per la interfície Default. Això va passar perquè el trànsit no arribava al router. Quan la ruta va passar a ser via `10.3.1.1`, el NAT va començar a funcionar. Es van fer diversos pings per comprovar com el comptador pujava; en aquest cas el número és 6, perquè s'han realitzat 6 pings.
 
-**Figura 9** · `docs/img/fig09-nat-comptador.png`
+**Figura 9** · 
+
+![Fig09](img/fig09-nat-comptador.png)
 
 *Comptador de la regla MASQUERADE després dels pings a 8.8.8.8 des de W-N01.*
