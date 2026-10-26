@@ -15,7 +15,7 @@ Responsable: Marc Balastegui
 
 ## 1. Configuració de la màquina a IsardVDI
  
-![Paràmetres de W-N01 a Isard](img/hardware_f-n01)
+![Paràmetres de W-N01 a Isard](img/web/hardware_w-n01)
  
 
 | Paràmetre | Valor | Perquè |
@@ -137,7 +137,7 @@ sudo netplan try
  
 ### 2.6 Comprovacions
  
-![Configuració base](img/w-n01-base.png)
+![Configuració base](img/comprovacions_w-n01.png)
  
 | Ordre | Perquè | Resultat |
 |---|---|---|
