@@ -47,6 +47,7 @@ sudo usermod -aG sudo bchecker
 - **`usermod -aG sudo bchecker`** afegeix l'usuari al grup `sudo`, perquè pugui administrar la màquina. L'opció `-a` (*append*) és important: sense ella, l'usuari perdria la resta de grups als quals pertany.
 
 **Figura 2** · 
+
 ![Fig02](img/fig02-hostname-adduser.png)
 
 *Canvi de hostname i creació de l'usuari bchecker.*
