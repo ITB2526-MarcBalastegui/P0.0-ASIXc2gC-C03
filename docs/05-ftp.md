@@ -97,7 +97,7 @@ Les decisions (fitxer per interfície, identificació per MAC, MTU 1446) i l'inc
 | `timedatectl` | Comprovació de la zona horària correcta | `Europe/Madrid` |
 | `id bchecker` | Comprovació dels grups pertinents a l'usuari | `groups=1001(bchecker),27(sudo)` |
 | `sudo sshd -T \| grep -i passwordauthentication` | Comprovació de que SSH accepta contrasenya i usuari | `yes` |
-| `ssh bchecker@localhost` | Entra per SSH | ``|
+| `ssh bchecker@localhost` | Entra per SSH | `Welcome to Ubuntu (...)`|
 
 ![Xarxa](img/f-n01-xarxa.png)
  
