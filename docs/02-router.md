@@ -29,7 +29,7 @@ S'han apuntat les adreces MAC perquè dins del sistema les interfícies es diuen
 
 ![Isard Xarxa](img/fig01-isard-xarxes-r-n01.png)
 
-*Configuració de recursos i xarxes de l'escriptori R-N01 a IsardVDI.*
+[*Configuració de recursos i xarxes de l'escriptori R-N01 a IsardVDI.*]
 
 ## 2. Configuració base
 
