@@ -99,7 +99,7 @@ Les decisions (fitxer per interfície, identificació per MAC, MTU 1446) i l'inc
 | `sudo sshd -T \| grep -i passwordauthentication` | Comprovació de que SSH accepta contrasenya i usuari | `yes` |
 | `ssh bchecker@localhost` | Entra per SSH | `Welcome to Ubuntu (...)`|
 
-![Xarxa](img/f-n01-xarxa.png)
+![Xarxa](img/ftp/xarxa_f-n01.png)
  
 | Prova | Ordre | Esperat | Resultat |
 |---|---|---|---|
