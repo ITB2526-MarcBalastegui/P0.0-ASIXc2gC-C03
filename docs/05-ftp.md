@@ -91,12 +91,12 @@ Les decisions (fitxer per interfície, identificació per MAC, MTU 1446) i l'inc
 
 ![Configuració base](img/ftp/comprovacions_f-n01)
 
-| Prova | Ordre | Esperat | Resultat |
+| Prova | Ordre | Que ès | Resultat |
 |---|---|---|---|
-| Hostname | `hostname` | `F-N01` | |
-| Zona horària | `timedatectl` | `Europe/Madrid` | |
-| bchecker amb sudo | `id bchecker` | grup `sudo` | |
-| SSH accepta contrasenya | `sudo sshd -T \| grep -i passwordauthentication` | `yes` | |
+| Hostname | `hostname` | Comprovació del Hostname | `F-N01` |
+| Zona horària | `timedatectl` | Comprovació de la zona horària correcta | `Europe/Madrid` |
+| bchecker amb sudo | `id bchecker` | Comprovació dels grups pertinents a l'usuari | `groups=1001(bchecker),27(sudo)` |
+| SSH accepta contrasenya | `sudo sshd -T \| grep -i passwordauthentication` | Comprovació | `yes` |
 | Accés SSH amb bchecker | `ssh bchecker@localhost` | Entra | |
 
 ![Xarxa](img/f-n01-xarxa.png)
