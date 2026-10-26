@@ -10,15 +10,15 @@ Aquest repositori conté la documentació del desplegament d'una infraestructura
 
 | Document | Contingut | Responsable |
 |---|---|---|
-| [01 – Arquitectura](docs/01-arquitectura.md) | Pla d'adreçament, interfícies i diagrama de la xarxa | Victor |
-| [02 – Router R-N01](docs/02-router.md) | Creació, configuració base, netplan, reenviament i NAT | Victor |
-| [03 – DNS i DHCP](docs/03-dns-dhcp.md) | Servidor DNS (bind9) i DHCP a D-N01 | Victor |
-| [04 – Base de dades](docs/04-bbdd.md) | MySQL a B-N01, esquema i importació del CSV | Adam |
-| [05 – FTP](docs/05-ftp.md) | Servidor vsftpd a F-N01 | Marc |
-| [06 – Servidor web](docs/06-web.md) | Apache i aplicació a W-N01 | Marc |
-| [07 – Clients](docs/07-clients.md) | Clients Windows i Linux a la Intranet | Victor |
-| [08 – Control de versions](docs/08-git.md) | Flux Git, claus SSH i desplegament amb `git pull` | Marc |
-| [09 – Proves](docs/09-proves.md) | Bateria de proves de tots els serveis | Tots |
+| [01 – Arquitectura](docs/01-arquitectura.md) | Pla d'adreçament, interfícies i diagrama de la xarxa |
+| [02 – Router R-N01](docs/02-router.md) | Creació, configuració base, netplan, reenviament i NAT |
+| [03 – DNS i DHCP](docs/03-dns-dhcp.md) | Servidor DNS (bind9) i DHCP a D-N01 |
+| [04 – Base de dades](docs/04-bbdd.md) | MySQL a B-N01, esquema i importació del CSV |
+| [05 – FTP](docs/05-ftp.md) | Servidor vsftpd a F-N01 |
+| [06 – Servidor web](docs/06-web.md) | Apache i aplicació a W-N01 |
+| [07 – Clients](docs/07-clients.md) | Clients Windows i Linux a la Intranet |
+| [08 – Control de versions](docs/08-git.md) | Flux Git, claus SSH i desplegament amb `git pull` |
+| [09 – Proves](docs/09-proves.md) | Bateria de proves de tots els serveis |
 
 Cada document segueix la mateixa estructura: **creació de la màquina** (adaptadors i recursos), **configuració base** (hostname, usuari, actualitzacions i SSH) i **serveis**, amb la seva comprovació i captures.
 
@@ -66,7 +66,7 @@ El projecte es divideix en tres sprints de deu hores per persona. Cada sprint t�
 
 ## 4. Accés
 
-Tots els equips tenen l'usuari `bchecker`, amb permisos de sudo. La contrasenya es comunica al professor per separat i no es publica en aquest repositori.
+Tots els equips tenen l'usuari `bchecker`, amb permisos de sudo. 
 
 ## 5. Estructura del repositori
 
