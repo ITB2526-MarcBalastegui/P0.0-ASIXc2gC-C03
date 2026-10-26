@@ -15,7 +15,7 @@ Responsable: Marc Balastegui
 
 ## 1. Configuració de la màquina a IsardVDI
 
-![Paràmetres fe F-N01 a Isard](img/f-n01-isard.png)
+![Paràmetres fe F-N01 a Isard](img/isard_f-01.png)
 
 | Paràmetre | Valor |
 |---|---|
