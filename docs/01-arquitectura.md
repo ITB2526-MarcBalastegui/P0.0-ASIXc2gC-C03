@@ -34,6 +34,32 @@
 
 ## Justificació del disseny
 
+### Agrupació de serveis per màquina
+
+El criteri general és **un servei principal per màquina**:
+
+- **Aïllament:** si un servei falla, s'ha de reiniciar o queda compromès, la resta continua funcionant.
+- **Manteniment:** es pot actualitzar o reconfigurar una màquina sense aturar-ne d'altres.
+- **Seguretat:** cada màquina té només el programari que necessita, de manera que hi ha menys punts vulnerables.
+
+Les excepcions següents tenen el seu motiu:
+
+**DNS i DHCP a la mateixa màquina (D-N01).** Són dos serveis d'infraestructura petits i molt lligats:
+
+- El DHCP, a més de la IP, diu a cada client quin servidor DNS ha de fer servir: tots dos formen part de la configuració de xarxa que reben els equips.
+- Si són a la mateixa màquina, el DNS pot registrar automàticament el nom dels clients a mesura que el DHCP els assigna una IP.
+- Tots dos han de ser a la Intranet i consumeixen molt pocs recursos. Separar-los només duplicaria màquines sense cap avantatge.
+
+L'inconvenient és que D-N01 és un punt únic de fallada: si cau, els clients nous no reben IP i no es resolen noms. A l'escala d'aquest projecte és acceptable; en un entorn real es posaria un segon servidor DNS i DHCP de reserva.
+
+**Apache i l'aplicació a la mateixa màquina (W-N01).** No són dos serveis independents: l'aplicació és codi PHP que executa Apache. Apache rep la petició, PHP genera la pàgina i Apache la retorna. L'aplicació no funciona sense el servidor web, i separar-los no tindria sentit.
+
+El que sí que se separa de l'aplicació és la **base de dades**, perquè té un altre nivell de seguretat i és a una altra xarxa (vegeu l'apartat de la base de dades).
+
+**El web i l'FTP en màquines diferents (W-N01 i F-N01).** Tots dos són a la DMZ, però són serveis independents. A més, l'FTP envia usuaris i contrasenyes sense xifrar, i és un dels serveis més atacats. Tenir-lo en una màquina pròpia fa que, si queda compromès, el servidor web no se'n vegi afectat.
+
+**El router no fa cap altre servei (R-N01).** Tot el trànsit hi passa, així que és la peça més crítica de la xarxa. No s'hi instal·la res més perquè tingui els mínims punts vulnerables possibles i perquè un error en un altre servei no deixi tota la infraestructura sense xarxa.
+
 ### Tres xarxes separades
 
 La infraestructura es divideix segons qui ha de poder accedir a cada servei:
