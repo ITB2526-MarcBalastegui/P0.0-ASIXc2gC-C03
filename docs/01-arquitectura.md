@@ -32,6 +32,28 @@
 
 ![Fig10](img/diagrama-xarxa.png)
 
+## Justificació del disseny
+ 
+**Tres xarxes separades.** La infraestructura es divideix segons qui ha de poder accedir a cada servei:
+ 
+| Xarxa | Funció | Equips |
+|---|---|---|
+| NAT | Connexió amb l'exterior | Només R-N01 |
+| DMZ | Serveis que s'ofereixen cap a fora | F-N01, W-N01 |
+| Intranet | Serveis i equips interns, no exposats | B-N01, D-N01, clients |
+ 
+Separar-les fa que, si un servei exposat queda compromès, l'atacant no tingui accés directe a la resta de la xarxa.
+ 
+**Per què el web i l'FTP són a la DMZ.** Són els serveis pensats per ser consultats des de fora de l'organització. Posar-los en una xarxa pròpia permet obrir-los a l'exterior sense obrir també la xarxa interna.
+ 
+**Per què la base de dades és a la Intranet i no a la DMZ.** Les dades són l'actiu més valuós i no s'han de poder consultar des de fora. L'aplicació web les necessita, però no cal que siguin al costat: W-N01 s'hi connecta a través del router, només pel port de MySQL (3306). Si algú comprometés el servidor web, la base de dades no seria a la mateixa xarxa.
+ 
+**Per què el DNS i el DHCP són a la Intranet.** El DHCP funciona per difusió (*broadcast*): el client, que encara no té IP, envia una petició a tota la seva xarxa. Aquests missatges no travessen el router, de manera que el servidor DHCP ha de ser al mateix segment que els clients que l'han de fer servir.
+ 
+**Per què un sol router.** Tot el trànsit entre xarxes, i cap a Internet, passa per R-N01. Això el converteix en l'únic punt on cal controlar què pot anar d'una xarxa a l'altra: fa el NAT perquè la DMZ i la Intranet surtin a Internet, i és on s'aplica el tallafocs.
+ 
+**IP fixa als servidors i DHCP als clients.** Els servidors han de tenir sempre la mateixa adreça perquè els altres equips els puguin trobar. Els clients poden canviar d'adreça sense cap problema, i el DHCP evita haver-los de configurar un a un.
+
 *Arquitectura de xarxa del grup 03. Les úniques connexions permeses de la DMZ cap a la Intranet són W-N01 → B-N01 pel port 3306/tcp i la DMZ → D-N01 pel port 53 (DNS).*
 
 ## Tallafocs previst (Sprint 3)
