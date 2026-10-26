@@ -91,21 +91,21 @@ Les decisions (fitxer per interfície, identificació per MAC, MTU 1446) i l'inc
 
 ![Configuració base](img/ftp/comprovacions_f-n01)
 
-| Ordre | Que ès | Resultat |
+| Ordre | Perquè | Resultat |
 |---|---|---|
-| `hostname` | Comprovació del Hostname | `F-N01` |
-| `timedatectl` | Comprovació de la zona horària correcta | `Europe/Madrid` |
-| `id bchecker` | Comprovació dels grups pertinents a l'usuari | `groups=1001(bchecker),27(sudo)` |
-| `sudo sshd -T \| grep -i passwordauthentication` | Comprovació de que SSH accepta contrasenya i usuari | `yes` |
-| `ssh bchecker@localhost` | Entra per SSH | `Welcome to Ubuntu (...)`|
+| `hostname` | Per comprovar el Hostname | `F-N01` |
+| `timedatectl | grep Timezone` | Per comprovar que la zona horària és la correcta | `Europe/Madrid` |
+| `id bchecker` | Per comprovar els grups pertinents a l'usuari | `groups=1001(bchecker),27(sudo)` |
+| `sudo sshd -T \| grep -i passwordauthentication` | Per comprovar que SSH accepta contrasenya i usuari | `yes` |
+| `ssh bchecker@localhost` | Per veure que entra per SSH | `Welcome to Ubuntu (...)`|
 
 ![Xarxa](img/ftp/xarxa_f-n01)
  
-| Prova | Ordre | Esperat | Resultat |
-|---|---|---|---|
-| IP de la DMZ | `ip a` | `10.3.1.10/24` a la ITB13 | |
-| Rutes | `ip route` | `default` per la Default i `10.3.1.0/24` per la ITB13 | |
-| Internet | `curl -I http://archive.ubuntu.com` | Respon | |
-| Arriba a W-N01 | `ping -c 3 10.3.1.20` | Resposta | |
+| Ordre | Perquè | Resultat |
+|---|---|---|
+| `ip a` | Per veure la IP que hem configurat de la interfície de xarxa del router | `10.3.1.10/24` a la ITB13 |
+| `ip route` | Per veure les rutes de xarxa i comprovar que hi ha ruta cap al Router | `default` per la Default i `10.3.1.0/24` per la ITB13  |
+| `curl -I http://archive.ubuntu.com` | Respon | |
+| `ping -c 3 10.3.1.20` | Resposta | |
 
 ---
