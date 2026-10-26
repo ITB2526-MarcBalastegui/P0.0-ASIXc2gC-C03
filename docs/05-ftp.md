@@ -94,9 +94,9 @@ Les decisions (fitxer per interfície, identificació per MAC, MTU 1446) i l'inc
 | Ordre | Perquè | Resultat |
 |---|---|---|
 | `hostname` | Per comprovar el Hostname | `F-N01` |
-| `timedatectl | grep Timezone` | Per comprovar que la zona horària és la correcta | `Europe/Madrid` |
+| `timedatectl \ grep Timezone` | Per comprovar que la zona horària és la correcta | `Europe/Madrid` |
 | `id bchecker` | Per comprovar els grups pertinents a l'usuari | `groups=1001(bchecker),27(sudo)` |
-| `sudo sshd -T \| grep -i passwordauthentication` | Per comprovar que SSH accepta contrasenya i usuari | `yes` |
+| `sudo sshd -T \ grep -i passwordauthentication` | Per comprovar que SSH accepta contrasenya i usuari | `yes` |
 | `ssh bchecker@localhost` | Per veure que entra per SSH | `Welcome to Ubuntu (...)`|
 
 ![Xarxa](img/ftp/xarxa_f-n01)
