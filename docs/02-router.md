@@ -26,6 +26,7 @@ El router és l'única màquina que té una interfície a cada xarxa, perquè é
 S'han apuntat les adreces MAC perquè dins del sistema les interfícies es diuen `enp1s0`, `enp2s0`, etc. Comparant les MAC és l'única manera segura de saber quina interfície correspon a cada xarxa abans de configurar les IPs.
 
 **Figura 1** · 
+
 ![Isard Xarxa](img/fig01-isard-xarxes-r-n01.png)
 
 *Configuració de recursos i xarxes de l'escriptori R-N01 a IsardVDI.*
@@ -62,7 +63,9 @@ sudo apt update && sudo apt upgrade -y
 - **Zona horària Europe/Madrid:** els logs del sistema i dels serveis han de tenir l'hora local. Si no, és difícil relacionar-los amb les proves i les captures, i en un context de seguretat és clau saber exactament quan ha passat cada cosa.
 - **`apt update`** actualitza la llista de paquets disponibles, i **`apt upgrade -y`** instal·la les actualitzacions pendents. Es fa abans de configurar cap servei, perquè la plantilla pot tenir paquets antics amb vulnerabilitats conegudes. Durant l'actualització, el sistema ha demanat el joc de caràcters de la consola i s'ha triat *Latin1 and Latin5*, que és el que suporta els accents del català i del castellà.
 
-**Figura 3** · ![Fig03](img/fig03-timezone-apt-update.png)
+**Figura 3** · 
+
+![Fig03](img/fig03-timezone-apt-update.png)
 
 *Configuració de la zona horària i actualització del sistema.*
 
@@ -76,7 +79,9 @@ sudo systemctl enable --now ssh
 - El paquet `openssh-server` ja venia instal·lat a la plantilla, com indica el missatge *"already the newest version"*. Tot i així, s'executa l'ordre per assegurar-ho.
 - **`systemctl enable --now ssh`** arrenca el servei immediatament (`--now`) i el deixa activat perquè arrenqui sol en cada reinici (`enable`). Això és el que permet administrar el router en remot, i el que permetrà al professor entrar-hi amb l'usuari bchecker.
 
-**Figura 4** · ![Fig04](img/fig04-ssh-install.png)
+**Figura 4** · 
+
+![Fig04](img/fig04-ssh-install.png)
 
 *Instal·lació i activació del servei SSH.*
 
@@ -98,7 +103,9 @@ systemctl status ssh
 
 A més, aquestes comprovacions ja s'han fet havent iniciat sessió com a **bchecker** (el prompt mostra `bchecker@R-N01`). Això demostra que l'usuari funciona i que pot fer servir `sudo`.
 
-**Figura 5** · `docs/img/fig05-comprovacio-base.png`
+**Figura 5** · 
+
+![Fig05](img/fig05-comprovacio-base.png)
 
 *Comprovació final de la configuració base.*
 
@@ -127,13 +134,17 @@ network:
         use-dns: false
 ```
 
-**Figura 6** · `docs/img/fig06-netplan-nano.png`
+**Figura 6** · 
+
+![Fig06](img/fig06-netplan-nano.png)
 
 *Fitxer de configuració de netplan editat amb nano.*
 
 **Comprovació.** Les IPs de cada interfície s'han de correspondre amb la taula d'adreçament, i `ip route` ha de tenir una sola ruta `default`, per `enp1s0`.
 
-**Figura 7** · `docs/img/fig07-netplan-aplicat.png`
+**Figura 7** · 
+
+![Fig07](img/fig07-netplan-aplicat.png)
 
 *Aplicació del netplan i sortida de `ip -br a` i `ip route`.*
 
