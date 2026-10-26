@@ -28,7 +28,9 @@
 
 ## Diagrama d'arquitectura
 
-**Figura 10** · `docs/img/diagrama-xarxa.png`
+**Figura 10** · 
+
+![Fig10](img/diagrama-xarxa.png)
 
 *Arquitectura de xarxa del grup 03. Les úniques connexions permeses de la DMZ cap a la Intranet són W-N01 → B-N01 pel port 3306/tcp i la DMZ → D-N01 pel port 53 (DNS).*
 
