@@ -89,7 +89,7 @@ Les decisions (fitxer per interfície, identificació per MAC, MTU 1446) i l'inc
  
 ### 2.3 Comprovacions
 
-![Configuració base](img/f-n01-base.png)
+![Configuració base](img/ftp/comprovacions_f-01)
 
 | Prova | Ordre | Esperat | Resultat |
 |---|---|---|---|
