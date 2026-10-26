@@ -10,7 +10,7 @@ Aquest repositori conté la documentació del desplegament d'una infraestructura
 
 | Document | Contingut |
 |---|---|
-| [01 – Arquitectura](docs/01-arquitectura.md) | Pla d'adreçament, interfícies i diagrama de la xarxa |
+| [01 – Arquitectura](docs/01-arquitectura.md) | Anàlisi i justificació de serveis, pla d'adreçament, interfícies i diagrama de la xarxa |
 | [02 – Router R-N01](docs/02-router.md) | Creació, configuració base, netplan, reenviament i NAT |
 | [03 – DNS i DHCP](docs/03-dns-dhcp.md) | Servidor DNS (bind9) i DHCP a D-N01 |
 | [04 – Base de dades](docs/04-bbdd.md) | MySQL a B-N01, esquema i importació del CSV |
