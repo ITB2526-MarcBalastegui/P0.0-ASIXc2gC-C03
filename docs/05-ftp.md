@@ -20,16 +20,16 @@ Responsable: Marc Balastegui
 | Paràmetre | Valor |
 |---|---|
 | Plantilla | Ubuntu Server 24.04 (catàleg d'Isard) |
-| vCPU | [omplir] |
-| RAM | [omplir] |
-| Disc | [omplir] |
+| vCPU | 2 |
+| RAM | 4 |
+| Disc | Default |
 
 ### Interfícies de xarxa
 
 | Interfície Isard | Nom a Linux | MAC | Ús |
 |---|---|---|---|
-| Default | enp1s0 | [omplir] | Temporal: sortida a Internet per instal·lar paquets |
-| ITB13 | enp2s0 | [omplir] | DMZ, IP fixa 10.3.1.10 |
+| Default | enp1s0 | 52:54:00:47:99:1b | Temporal: sortida a Internet per instal·lar paquets |
+| ITB13 | enp2s0 | 52:54:00:51:fe | DMZ, IP fixa 10.3.1.10 |
  
 La interfície Default és temporal pel mateix motiu que a [W-N01](06-web.md#1-configuració-de-la-màquina-a-isardvdi).
  
