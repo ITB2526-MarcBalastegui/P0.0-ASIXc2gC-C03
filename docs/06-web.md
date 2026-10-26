@@ -15,14 +15,15 @@ Responsable: Marc Balastegui
 
 ## 1. Configuració de la màquina a IsardVDI
  
-![Paràmetres de W-N01 a Isard](img/w-n01-isard.png)
+![Paràmetres de W-N01 a Isard](img/hardware_f-n01)
  
-| Paràmetre | Valor |
-|---|---|
-| Plantilla | Ubuntu Server 24.04 (catàleg d'Isard) |
-| vCPU | [omplir] |
-| RAM | [omplir] |
-| Disc | [omplir] |
+
+| Paràmetre | Valor | Perquè |
+|---|---|---|
+| Plantilla | Ubuntu Server 24.04 (catàleg d'Isard) | És l'última versió disponible d'Ubuntu Server |
+| vCPU | 2 | És un servei molt lleuger, així que no es necessiten molts recursos |
+| RAM | 4 | És un servei molt lleuger, així que no es necessiten molts recursos |
+| Disc | Default | No fa falta canviar cap configuració aquí |
  
  ### Interfícies de xarxa
  
