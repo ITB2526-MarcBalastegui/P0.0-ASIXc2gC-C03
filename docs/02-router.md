@@ -25,7 +25,8 @@ El router és l'única màquina que té una interfície a cada xarxa, perquè é
 
 S'han apuntat les adreces MAC perquè dins del sistema les interfícies es diuen `enp1s0`, `enp2s0`, etc. Comparant les MAC és l'única manera segura de saber quina interfície correspon a cada xarxa abans de configurar les IPs.
 
-**Figura 1** · ![Isard Xarxa](img/fig01-isard-xarxes-r-n01.png)
+**Figura 1** · 
+![Isard Xarxa](img/fig01-isard-xarxes-r-n01.png)
 
 *Configuració de recursos i xarxes de l'escriptori R-N01 a IsardVDI.*
 
@@ -45,7 +46,8 @@ sudo usermod -aG sudo bchecker
 - **`adduser bchecker`** crea l'usuari amb el seu directori personal i li assigna la contrasenya `bchecker121`. Els camps d'informació personal s'han deixat en blanc perquè no són necessaris. L'enunciat exigeix aquest usuari a tots els sistemes, per a la correcció.
 - **`usermod -aG sudo bchecker`** afegeix l'usuari al grup `sudo`, perquè pugui administrar la màquina. L'opció `-a` (*append*) és important: sense ella, l'usuari perdria la resta de grups als quals pertany.
 
-**Figura 2** · ![Fig02](img/fig02-hostname-adduser.png)
+**Figura 2** · 
+![Fig02](img/fig02-hostname-adduser.png)
 
 *Canvi de hostname i creació de l'usuari bchecker.*
 
