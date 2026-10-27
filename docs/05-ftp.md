@@ -59,7 +59,7 @@ A `/etc/hosts`:
 
 ### 2.2 Xarxa (netplan)
 
-**Interfíficie Default** ([`config/F-N01/50-cloud-init.yaml`](../config/F-N01/50-cloud-init.yaml)):
+**Interfíficie Default** 
 
 ```yaml
 network:
@@ -71,7 +71,7 @@ network:
       dhcp4: true
 ```
 
-**Interfície ITB13, DMZ** ([`config/F-N01/60-itb13.yaml`](../config/F-N01/60-itb13.yaml)):
+**Interfície ITB13, DMZ** 
 
 ```yaml
 network:
