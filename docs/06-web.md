@@ -149,13 +149,12 @@ sudo netplan try
  
 ![Xarxa](img/w-n01-xarxa.png)
  
-| Prova | Ordre | Esperat | Resultat |
-|---|---|---|---|
-| IP de la DMZ | `ip a` | `10.3.1.20/24` a la ITB13 | |
-| Rutes | `ip route` | `default` per la Default i `10.3.1.0/24` per la ITB13 | |
-| Internet | `curl -I http://archive.ubuntu.com` | Respon | |
-| Arriba a F-N01 | `ping -c 3 10.3.1.10` | Resposta | |
- 
+| Ordre | Perquè | Resultat |
+|---|---|---|
+| `ip a` | Per veure la IP que hem configurat de la interfície de xarxa del router | `10.3.1.20/24` a la ITB13 |
+| `ip route` | Per veure les rutes de xarxa i comprovar que hi ha ruta cap al Router | `default` per la Default i `10.3.1.0/24` per la ITB13  |
+| `curl -I http://archive.ubuntu.com` | Comprovar que hi ha sortida a Internet  | `HTTP(...)`,Respon |
+| `ping -c 3 10.3.1.10` | Comprovar que hi ha resposta cap a la màquina F-N01 |  `64 bytes(...)`, Hi ha connectivitat |
 ---
  
 ## 3. Instal·lació del servei: Apache i PHP
