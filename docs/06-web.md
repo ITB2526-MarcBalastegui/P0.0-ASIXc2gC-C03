@@ -137,7 +137,7 @@ sudo netplan try
  
 ### 2.6 Comprovacions
  
-![Configuració base](img/comprovacions_w-n01.png)
+![Configuració base](img/web/comprovacions_w-n01.png)
  
 | Ordre | Perquè | Resultat |
 |---|---|---|
