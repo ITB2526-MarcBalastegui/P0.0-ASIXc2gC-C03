@@ -79,7 +79,7 @@ echo 'bchecker:bchecker121' | sudo chpasswd
  
 Hi ha **un fitxer per interfície**. Totes dues s'identifiquen per MAC i no pel nom, perquè en treure la Default a Isard la ITB13 pot canviar de nom (de `enp2s0` a `enp1s0`), i la MAC no canvia.
  
-**Interfície Default** ([`config/W-N01/50-cloud-init.yaml`](../config/W-N01/50-cloud-init.yaml)):
+**Interfície Default** 
  
 ```yaml
 network:
@@ -91,7 +91,7 @@ network:
       dhcp4: true
 ```
  
-**Interfície ITB13, DMZ** ([`config/W-N01/60-itb13.yaml`](../config/W-N01/60-itb13.yaml)):
+**Interfície ITB13, DMZ** 
  
 ```yaml
 network:
