@@ -1,0 +1,7 @@
+network:
+  version: 2
+  ethernets:
+    default:
+      match:
+        macaddress: "52:54:00:39:73:85"
+      dhcp4: true
