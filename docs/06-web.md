@@ -141,7 +141,7 @@ sudo netplan try
  
 | Ordre | Perquè | Resultat |
 |---|---|---|
-| `hostname` | Per comprovar el Hostname | `F-N01` |
+| `hostname` | Per comprovar el Hostname | `W-N01` |
 | `timedatectl \ grep "Time zone"` | Per comprovar que la zona horària és la correcta | `Europe/Madrid` |
 | `id bchecker` | Per comprovar els grups pertinents a l'usuari | `groups=1001(bchecker),27(sudo)` |
 | `sudo sshd -T \ grep -i passwordauthentication` | Per comprovar que SSH accepta contrasenya i usuari | `yes` |
