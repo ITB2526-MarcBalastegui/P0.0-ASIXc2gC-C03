@@ -179,7 +179,7 @@ echo '<?php echo "PHP funciona a " . gethostname() . "\n"; ?>' | sudo tee /var/w
  
 ### 3.3 Comprovacions
  
-![Apache i PHP](img/web/apache_w-n01)
+![Apache i PHP](img/web/apache_w-n01.png)
  
 | Prova | Ordre | Esperat | Resultat |
 |---|---|---|---|
