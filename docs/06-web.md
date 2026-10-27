@@ -193,9 +193,8 @@ echo '<?php echo "PHP funciona a " . gethostname() . "\n"; ?>' | sudo tee /var/w
 |---|---|---|
 | `systemctl status apache2` | Per comprovar que el servei Apache està actiu | `active (running), enabled` |
 | `php -v` | Per veure que PHP existeix, la versió | `PHP 8.3` |
-| `php -m \| grep -i mysql` | Per comrpovar que Apache conté també els mòduls de MySQL | `groups=1001(bchecker),27(sudo)` |
-| `sudo sshd -T \ grep -i passwordauthentication` | Per comprovar que SSH accepta contrasenya i usuari | `yes` |
-| `ssh bchecker@localhost` | Per veure que entra per SSH | `Welcome to Ubuntu (...)`|
+| `php -m \| grep -i mysql` | Per comprovar que Apache conté també els mòduls de MySQL | `groups=1001(bchecker),27(sudo)` |
+| `curl localhost/prova.php` | Per comprovar PHP funciona amb Apache |
 
 ![Accés des de F-N01](img/web/acces-desde-f_n01.png)
  
