@@ -147,7 +147,7 @@ sudo netplan try
 | `sudo sshd -T \ grep -i passwordauthentication` | Per comprovar que SSH accepta contrasenya i usuari | `yes` |
 | `ssh bchecker@localhost` | Per veure que entra per SSH | `Welcome to Ubuntu (...)`|
  
-![Xarxa](img/w-n01-xarxa.png)
+![Xarxa](img/xarxa_w-n01.png)
  
 | Ordre | Perquè | Resultat |
 |---|---|---|
@@ -179,7 +179,7 @@ echo '<?php echo "PHP funciona a " . gethostname() . "\n"; ?>' | sudo tee /var/w
  
 ### 3.3 Comprovacions
  
-![Apache i PHP](img/w-n01-apache.png)
+![Apache i PHP](img/web/apache_w-n01)
  
 | Prova | Ordre | Esperat | Resultat |
 |---|---|---|---|
@@ -188,7 +188,7 @@ echo '<?php echo "PHP funciona a " . gethostname() . "\n"; ?>' | sudo tee /var/w
 | Mòduls MySQL | `php -m \| grep -i mysql` | `mysqli`, `mysqlnd`, `pdo_mysql` | |
 | Apache + PHP | `curl localhost/prova.php` | `PHP funciona a W-N01` | |
  
-![Accés des de F-N01](img/w-n01-des-de-f-n01.png)
+![Accés des de F-N01](img/web/acces-desde-f_n01.png)
  
 | Prova | Ordre (des de F-N01) | Esperat | Resultat |
 |---|---|---|---|
