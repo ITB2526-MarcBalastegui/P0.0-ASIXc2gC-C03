@@ -180,13 +180,6 @@ echo '<?php echo "PHP funciona a " . gethostname() . "\n"; ?>' | sudo tee /var/w
 ### 3.3 Comprovacions
  
 ![Apache i PHP](img/web/apache_w-n01.png)
- 
-| Prova | Ordre | Esperat | Resultat |
-|---|---|---|---|
-| Apache actiu | `systemctl status apache2` | `active (running)` i `enabled` | |
-| Versió de PHP | `php -v` | PHP 8.3 | |
-| Mòduls MySQL | `php -m \| grep -i mysql` | `mysqli`, `mysqlnd`, `pdo_mysql` | |
-| Apache + PHP | `curl localhost/prova.php` | `PHP funciona a W-N01` | |
 
  
 | Ordre | Perquè | Resultat |
@@ -194,10 +187,11 @@ echo '<?php echo "PHP funciona a " . gethostname() . "\n"; ?>' | sudo tee /var/w
 | `systemctl status apache2` | Per comprovar que el servei Apache està actiu | `active (running), enabled` |
 | `php -v` | Per veure que PHP existeix, la versió | `PHP 8.3` |
 | `php -m \| grep -i mysql` | Per comprovar que Apache conté també els mòduls de MySQL | `groups=1001(bchecker),27(sudo)` |
-| `curl localhost/prova.php` | Per comprovar PHP funciona amb Apache |
+| `curl localhost/prova.php` | Per comprovar PHP funciona amb Apache | `PHP funciona a W-N01` |
 
 ![Accés des de F-N01](img/web/acces-desde-f_n01.png)
  
-| Prova | Ordre (des de F-N01) | Esperat | Resultat |
-|---|---|---|---|
-| Web accessible des de la DMZ | `curl http://10.3.1.20/prova.php` | `PHP funciona a W-N01` | |
+| Ordre | Perquè | Resultat |
+|---|---|---|
+| `curl http://10.3.1.20/prova.php` | Per comprovar que funciona PHP a través de la xarxa DMZ, desde una altra màquina (F-N01) | `PHP funciona a W-N01` |
+
