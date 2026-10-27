@@ -187,7 +187,16 @@ echo '<?php echo "PHP funciona a " . gethostname() . "\n"; ?>' | sudo tee /var/w
 | Versió de PHP | `php -v` | PHP 8.3 | |
 | Mòduls MySQL | `php -m \| grep -i mysql` | `mysqli`, `mysqlnd`, `pdo_mysql` | |
 | Apache + PHP | `curl localhost/prova.php` | `PHP funciona a W-N01` | |
+
  
+| Ordre | Perquè | Resultat |
+|---|---|---|
+| `systemctl status apache2` | Per comprovar que el servei Apache està actiu | `active (running), enabled` |
+| `php -v` | Per veure que PHP existeix, la versió | `PHP 8.3` |
+| `php -m \| grep -i mysql` | Per comrpovar que Apache conté també els mòduls de MySQL | `groups=1001(bchecker),27(sudo)` |
+| `sudo sshd -T \ grep -i passwordauthentication` | Per comprovar que SSH accepta contrasenya i usuari | `yes` |
+| `ssh bchecker@localhost` | Per veure que entra per SSH | `Welcome to Ubuntu (...)`|
+
 ![Accés des de F-N01](img/web/acces-desde-f_n01.png)
  
 | Prova | Ordre (des de F-N01) | Esperat | Resultat |
