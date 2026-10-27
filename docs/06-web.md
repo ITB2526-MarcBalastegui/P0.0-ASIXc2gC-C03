@@ -147,7 +147,7 @@ sudo netplan try
 | `sudo sshd -T \ grep -i passwordauthentication` | Per comprovar que SSH accepta contrasenya i usuari | `yes` |
 | `ssh bchecker@localhost` | Per veure que entra per SSH | `Welcome to Ubuntu (...)`|
  
-![Xarxa](img/xarxa_w-n01.png)
+![Xarxa](img/web/xarxa_w-n01.png)
  
 | Ordre | Perquè | Resultat |
 |---|---|---|
