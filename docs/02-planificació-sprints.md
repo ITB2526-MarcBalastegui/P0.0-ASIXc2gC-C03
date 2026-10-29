@@ -55,8 +55,8 @@ El projecte es divideix en tres sprints:
 | | Descarregar el CSV, analitzar-lo i preparar l'esquema de la taula | 
 | | Documentar B-N01 i MySQL |
 | **Marc** | Creació del diagrama i anàlisi de serveis |
-| | Crear W-N01 i F-N01 des de la plantilla d'Isard amb IPs 10.3.1.20 i 10.3.1.10 |
 | | Crear el repositori GitHub amb l'esquema de directoris comoplet |
+| | Crear W-N01 i F-N01 des de la plantilla d'Isard amb IPs 10.3.1.20 i 10.3.1.10 |
 | | Instal·lar Apache i PHP a W-N01 |
 | | Documentar W-N01 i F-N01 |
 
