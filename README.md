@@ -1,6 +1,6 @@
 # P0.0 – Desplegament de la infraestructura
 
-Projecte intermodular ASIX2 · Institut Tecnològic de Barcelona · **Grup G03**
+Projecte intermodular ASIXc2 · Institut Tecnològic de Barcelona · **Grup G03**
 
 Aquest repositori conté la documentació del desplegament d'una infraestructura de xarxa a IsardVDI: un router amb tallafocs i NAT, una zona desmilitaritzada (DMZ) amb els serveis exposats, una Intranet amb la base de dades, el DNS, el DHCP i els clients, i una aplicació web que mostra les dades d'un CSV municipal.
 
