@@ -54,23 +54,23 @@ La infraestructura es divideix segons qui ha de poder accedir a cada servei:
  
 Si un servei de la DMZ queda compromès, l'atacant no té accés directe a la Intranet, per arribar-hi ha de passar pel router, que només deixa passar el trànsit imprescindible.
  
-### Per què el web i l'FTP són a la DMZ
+### Decisions sobre FTP a la xarxa DMZ
  
 Són els serveis pensats per ser consultats des de fora de l'organització. Tenir-los en una xarxa pròpia permet exposar-los sense exposar també la xarxa interna.
  
-### Per què la base de dades és a la Intranet
+### Decisions relatives a la base de dades
  
 Les dades són el més valuós i no s'han de poder consultar des de fora. L'aplicació de W-N01 les necessita, però no cal que siguin a la mateixa xarxa es connecta a través del router, només pel port 3306/tcp. Si algú comprometés el servidor web, no podria accedir a la base de dades.
  
-### Per què el DNS i el DHCP són a la Intranet
+### Decisions relatives a DHCP i DNS
  
 - **DHCP:** Funciona per difusió (*broadcast*). El client, que encara no té IP, envia la petició a tota la seva xarxa, i aquests missatges no travessen el router. Per això el servidor ha d'estar al mateix segment que els clients.
 - **DNS:** És un servei intern, que tradueix els noms dels nostres equips. Els servidors de la DMZ també el fan servir, i per això el tallafocs permet el port 53 de la DMZ cap a D-N01. És l'única excepció, a més de la base de dades.
-### Per què un sol router
+### Decisions relatives al router
  
 Tot el trànsit entre xarxes, i cap a Internet, passa per R-N01. Això el converteix en l'únic punt on cal controlar què pot anar d'una xarxa a l'altra, fa el NAT perquè la DMZ i la Intranet surtin a Internet i aplica el tallafocs. Cap altre equip té interfície a la xarxa NAT.
  
-### Per què la VPN arriba al router
+### Decisions relatives a la VPN
  
 La VPN permet administrar la infraestructura per SSH des de fora del centre. Entrar pel router, en lloc de connectar cada màquina a la VPN, manté un únic punt d'entrada i fa que aquest accés també quedi sota el control del tallafocs.
  
