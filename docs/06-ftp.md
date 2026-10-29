@@ -141,8 +141,8 @@ ping -c 3 10.3.1.20
 
 A més, aquestes comprovacions ja s'han fet havent iniciat sessió com a **bchecker** (el prompt mostra `bchecker@F-N01`). Això demostra que l'usuari funciona i que pot fer servir `sudo`.
 
-![Comprovació de la configuració base](img/ftp/comprovacions_f-n01.png)
-![Comprovació de la xarxa](img/ftp/xarxa_f-n01.png)
+![Comprovació de la configuració base](img/ftp/comprovacions_f-n01)
+![Comprovació de la xarxa](img/ftp/xarxa_f-n01)
 
 *Comprovació final de la configuració base.*
 
