@@ -9,6 +9,13 @@
 | ASIXC2-ITB14 | Intranet | 10.3.2.0/24 |
 | ITB13a / ITB14a | Reserva | — |
 | Wireguard VPN | Accés d'administració des de fora | VPN d'Isard |
+
+## Diagrama d'arquitectura
+ 
+![Figura 10: arquitectura de xarxa del grup 03](img/diagrama-xarxa.png)
+ 
+*Arquitectura de xarxa del grup 03. Les úniques connexions permeses de la DMZ cap a la Intranet són W-N01 → B-N01 pel port 3306/tcp i la DMZ → D-N01 pel port 53 (DNS).*
+ 
  
 ## Pla d'adreçament
  
@@ -32,12 +39,7 @@ Les adreces segueixen el format `10.3.X.H`:
 - **3:** número de grup, perquè les adreces no coincideixin amb les d'altres grups.
 - **X:** la xarxa (1 DMZ, 2 Intranet). Només amb veure una IP se sap on és l'equip.
 - **H:** `.1` per al router, `.2` a `.9` reservades, `.10` i `.20` per als servidors i `.100` a `.200` per als clients.
-## Diagrama d'arquitectura
- 
-![Figura 10: arquitectura de xarxa del grup 03](img/diagrama-xarxa.png)
- 
-**Figura 10** · *Arquitectura de xarxa del grup 03. Les úniques connexions permeses de la DMZ cap a la Intranet són W-N01 → B-N01 pel port 3306/tcp i la DMZ → D-N01 pel port 53 (DNS).*
- 
+
 ## Justificació del disseny
  
 ### Tres xarxes separades
