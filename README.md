@@ -11,13 +11,13 @@ Aquest repositori conté la documentació del desplegament d'una infraestructura
 | Document | Contingut |
 |---|---|
 | [01 – Arquitectura](docs/01-arquitectura.md) | Anàlisi i justificació de serveis, pla d'adreçament, interfícies i diagrama de la xarxa |
-| [02 – Router R-N01](docs/02-router.md) | Creació, configuració base, netplan, reenviament i NAT |
-| [03 – DNS i DHCP](docs/03-dns-dhcp.md) | Servidor DNS (bind9) i DHCP a D-N01 |
-| [04 – Base de dades](docs/04-bbdd.md) | MySQL a B-N01, esquema i importació del CSV |
-| [05 – FTP](docs/05-ftp.md) | Servidor vsftpd a F-N01 |
-| [06 – Servidor web](docs/06-web.md) | Apache i aplicació a W-N01 |
-| [07 – Clients](docs/07-clients.md) | Clients Windows i Linux a la Intranet |
-| [08 – Control de versions](docs/08-git.md) | Flux Git, claus SSH i desplegament amb `git pull` |
+| [02 - Planificació d'sprints](docs/02-planificació-sprints.md) | Planificació i anàlisi dels sprints |
+| [03 – Router R-N01](docs/03-router.md) | Creació, configuració base, netplan, reenviament i NAT |
+| [04 – DNS i DHCP](docs/04-dns-dhcp.md) | Servidor DNS (bind9) i DHCP a D-N01 |
+| [05 – Base de dades](docs/05-bbdd.md) | MySQL a B-N01, esquema i importació del CSV |
+| [06 – FTP](docs/06-ftp.md) | Servidor vsftpd a F-N01 |
+| [07 – Servidor web](docs/07-web.md) | Apache i aplicació a W-N01 |
+| [08 – Clients](docs/08-clients.md) | Clients Windows i Linux a la Intranet |
 | [09 – Proves](docs/09-proves.md) | Bateria de proves de tots els serveis |
 
 Cada document segueix la mateixa estructura: **creació de la màquina** (adaptadors i recursos), **configuració base** (hostname, usuari, actualitzacions i SSH) i **serveis**, amb la seva comprovació i captures.
