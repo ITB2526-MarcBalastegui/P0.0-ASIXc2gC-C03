@@ -1,4 +1,4 @@
-# Documentació B-N01
+# Instal.lació i Configuració del servei de BBDD
 
 Servidor de base de dades (MySQL) del projecte P0.0.
 
