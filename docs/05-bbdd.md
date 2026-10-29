@@ -23,7 +23,6 @@ A B-N01 se li han afegit dos adaptadors: un de temporal per poder instal·lar pa
 
 S'han apuntat les adreces MAC perquè dins del sistema les interfícies es diuen `enp1s0`, `enp2s0`, etc. Comparant les MAC és la manera segura de saber quina interfície correspon a cada xarxa abans de configurar les IPs.
 
-**Figura 1** ·
 
 ![Isard Xarxa](img/bbdd/01-hardware-isard.png)
 
@@ -45,7 +44,6 @@ sudo usermod -aG sudo bchecker
 - **`adduser bchecker`** crea l'usuari amb el seu directori personal i li assigna la contrasenya `bchecker121`. L'enunciat exigeix aquest usuari a tots els sistemes, per a la correcció.
 - **`usermod -aG sudo bchecker`** afegeix l'usuari al grup `sudo`, perquè pugui administrar la màquina. L'opció `-a` (*append*) és important: sense ella, l'usuari perdria la resta de grups als quals pertany.
 
-**Figura 2** ·
 
 ![Fig02](img/bbdd/hostname-adduser.png)
 
@@ -61,7 +59,6 @@ sudo apt update && sudo apt upgrade -y
 - **Zona horària Europe/Madrid:** els logs del sistema i de MySQL han de tenir l'hora local. Si no, és difícil relacionar-los amb les proves i les captures, i en un context de seguretat és clau saber exactament quan ha passat cada cosa.
 - **`apt update`** actualitza la llista de paquets disponibles, i **`apt upgrade -y`** instal·la les actualitzacions pendents. Es fa abans de configurar cap servei, perquè la plantilla pot tenir paquets antics amb vulnerabilitats conegudes.
 
-**Figura 3** ·
 
 ![Fig03](img/bbdd/timezone-apt-update.png)
 
@@ -77,7 +74,6 @@ sudo systemctl enable --now ssh
 - **`apt install -y openssh-server`** instal·la el servidor SSH. Si la plantilla ja el portava, l'ordre simplement ho indica i no canvia res.
 - **`systemctl enable --now ssh`** arrenca el servei immediatament (`--now`) i el deixa activat perquè arrenqui sol en cada reinici (`enable`). Això és el que permet administrar el servidor en remot, i el que permetrà al professor entrar-hi amb l'usuari bchecker.
 
-**Figura 4** ·
 
 ![Fig04](img/bbdd/ssh-install.png)
 
@@ -112,7 +108,6 @@ sudo chmod 600 /etc/netplan/*.yaml
 sudo netplan apply
 ```
 
-**Figura 5** ·
 
 ![Fig05](img/bbdd/02-netplan.png)
 
@@ -124,7 +119,6 @@ sudo netplan apply
 ip -br a
 ```
 
-**Figura 6** ·
 
 ![Fig06](img/bbdd/03-ip-br-a.png)
 
@@ -149,7 +143,6 @@ systemctl status ssh
 
 A més, aquestes comprovacions es fan havent iniciat sessió com a **bchecker** (el prompt mostra `bchecker@B-N01`). Això demostra que l'usuari funciona i que pot fer servir `sudo`.
 
-**Figura 7** ·
 
 ![Fig07](img/bbdd/04-hostnamectl.png)
 
@@ -171,7 +164,6 @@ sudo systemctl status mysql
 
 **Comprovació.** El servei ha de figurar com a `active (running)` i `enabled`, amb l'estat *"Server is operational"*. La versió instal·lada és MySQL 8.0.
 
-**Figura 8** ·
 
 ![Fig08](img/bbdd/05-systemctl-mysql.png)
 
@@ -205,7 +197,6 @@ EXIT;
 mysql -u bchecker -pbchecker121 -e "SHOW DATABASES;"
 ```
 
-**Figura 9** ·
 
 ![Fig09](img/bbdd/06-mysql-creacio-bd.png)
 
@@ -238,7 +229,6 @@ wc -l equipaments_educacio_utf8.csv
 
 El resultat és `charset=utf-8` i un total de **2711 línies**. Aquesta xifra no coincideix amb el nombre de registres perquè alguns camps contenen salts de línia; el recompte real es fa a l'apartat següent.
 
-**Figura 10** ·
 
 ![Fig10](img/bbdd/07-file-head-wc.png)
 
@@ -255,7 +245,6 @@ csvcut -d ';' -n equipaments_educacio_utf8.csv
 csvcut -t -n equipaments_educacio_utf8.csv
 ```
 
-**Figura 11** ·
 
 ![Fig11](img/bbdd/08-csvcut-separador.png)
 
@@ -269,13 +258,11 @@ csvstat --count equipaments_educacio_utf8.csv
 csvstat equipaments_educacio_utf8.csv > ~/data/csvstat_salida.txt
 ```
 
-**Figura 12** ·
 
 ![Fig12](img/bbdd/09-csvcut-columnes.png)
 
 *Llista numerada de les 40 columnes del CSV.*
 
-**Figura 13** ·
 
 ![Fig13](img/bbdd/10-csvstat-txt.png)
 
@@ -307,7 +294,6 @@ L'script generat automàticament conté diverses incongruències, per això s'ha
 | Longituds de `VARCHAR` ajustades al màxim actual | Longituds amb marge |
 | Sense clau primària | `id INT AUTO_INCREMENT PRIMARY KEY` |
 
-**Figura 14** ·
 
 ![Fig14](img/bbdd/11-create-table.png)
 
@@ -332,7 +318,6 @@ csvsql -y 0 --db "mysql+pymysql://bchecker:bchecker121@localhost/equipaments" \
        --tables equipaments_educacio --no-create --insert equipaments_educacio_utf8.csv
 ```
 
-**Figura 15** ·
 
 ![Fig15](img/bbdd/12-carrega-csvsql.png)
 
@@ -359,7 +344,6 @@ mysql -u bchecker -pbchecker121 equipaments -e "SELECT register_id, name, addres
 | Codis postals | `08024`, `08030`, `08038` (amb zero inicial) |
 | Caràcters especials | `Institut Escola El Til·ler` correcte |
 
-**Figura 16** ·
 
 ![Fig16](img/bbdd/13-verificacio-final.png)
 
