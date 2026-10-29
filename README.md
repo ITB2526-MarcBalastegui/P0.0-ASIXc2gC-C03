@@ -5,7 +5,19 @@ Projecte intermodular ASIXc2 · Institut Tecnològic de Barcelona · **Grup G03*
 Aquest repositori conté la documentació del desplegament d'una infraestructura de xarxa a IsardVDI: un router amb tallafocs i NAT, una zona desmilitaritzada (DMZ) amb els serveis exposats, una Intranet amb la base de dades, el DNS, el DHCP i els clients, i una aplicació web que mostra les dades d'un CSV municipal.
 
 ---
+## La pràctica
 
+L'objectiu és muntar una infraestructura completa, provar-la i documentar-la. Els requisits principals són:
+
+- **Xarxa:** un router que connecta la DMZ i la Intranet entre elles i amb Internet, amb NAT per a les màquines internes i un tallafocs que controla el trànsit entre les dues xarxes.
+- **DMZ:** servidors amb IP fixa, accessibles des de l'exterior. Hi ha el servidor FTP i el servidor web amb l'aplicació.
+- **Intranet:** la base de dades MySQL amb les dades del CSV, el servidor DNS i DHCP, i els clients Windows i Linux, que reben la configuració per DHCP.
+- **Seguretat:** de la DMZ cap a la Intranet només es permet el trànsit imprescindible: el web cap a la base de dades, i la DMZ cap al DNS.
+- **Accés:** tots els equips tenen l'usuari `bchecker`, que el professor fa servir per corregir.
+- **Control de versions:** el codi de l'aplicació i la documentació es publiquen a GitHub, i el servidor web es desplega amb `git pull`.
+
+---
+  
 ## Índex de documentació
 
 | Document | Contingut |
