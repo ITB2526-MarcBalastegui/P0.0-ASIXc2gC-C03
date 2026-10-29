@@ -64,53 +64,46 @@ El projecte es divideix en tres sprints:
 
 ## 4. Sprint 2 – Serveis
 
-| Persona | Tasca | h |
-|---|---|---|
-| **Victor** | Crear D-N01 des de la plantilla d'Isard, amb configuració base i IP 10.3.2.20 | 2 |
-| | Servidor DHCP a D-N01: rang 10.3.2.100–200, gateway 10.3.2.1 | 3 |
-| | Servidor DNS (bind9) a D-N01: registres de totes les màquines i reenviament a un DNS públic | 3 |
-| | Documentar D-N01, DHCP i DNS | 2 |
-| **Adam** | Treure la interfície Default de B-N01 i posar-hi el DNS 10.3.2.20 | 1 |
-| | Crear la taula i importar el CSV a MySQL, comprovant el nombre de files i els accents | 4 |
-| | Crear l'usuari de l'aplicació, només de lectura i només des de W-N01 | 1 |
-| | Primera versió de l'aplicació: connexió a B-N01 i llistat de la taula | 2 |
-| | Documentar la importació i els usuaris de MySQL | 2 |
-| **Marc** | Treure la interfície Default de W-N01 i F-N01 i posar-hi el DNS 10.3.2.20 | 1 |
-| | Servidor FTP vsftpd a F-N01: usuaris locals, engabiats i ports passius fixos | 3 |
-| | Clau SSH de W-N01 a GitHub (deploy key) i clonar el repositori | 3 |
-| | Pàgina PHP de prova a W-N01 que es connecti a B-N01 | 1 |
-| | Documentar l'FTP i la connexió de W-N01 amb GitHub | 2 |
+| Persona | Tasca |
+|---|---|
+| **Victor** | Crear D-N01 des de la plantilla d'Isard, amb configuració base i IP 10.3.2.20 |
+| | Servidor DHCP a D-N01: rang 10.3.2.100–200, gateway 10.3.2.1 |
+| | Servidor DNS (bind9) a D-N01: registres de totes les màquines i reenviament a un DNS públic |
+| | Documentar D-N01, DHCP i DNS |
+| **Adam** | Treure la interfície Default de B-N01 i posar-hi el DNS 10.3.2.20 |
+| | Crear la taula i importar el CSV a MySQL, comprovant el nombre de files i els accents |
+| | Crear l'usuari de l'aplicació, només de lectura i només des de W-N01 |
+| | Primera versió de l'aplicació: connexió a B-N01 i llistat de la taula |
+| | Documentar la importació i els usuaris de MySQL |
+| **Marc** | Treure la interfície Default de W-N01 i F-N01 i posar-hi el DNS 10.3.2.20 |
+| | Servidor FTP vsftpd a F-N01: usuaris locals, engabiats i ports passius fixos |
+| | Clau SSH de W-N01 a GitHub (deploy key) i clonar el repositori |
+| | Pàgina PHP de prova a W-N01 que es connecti a B-N01 |
+| | Documentar l'FTP i la connexió de W-N01 amb GitHub | 
 
 ---
 
 ## 5. Sprint 3 – Aplicació, seguretat i tancament
 
-| Persona | Tasca | h |
-|---|---|---|
-| **Victor** | Crear els clients Windows i Linux, només amb ITB14 i per DHCP | 3 |
-| | Tallafocs a R-N01: de la DMZ cap a la Intranet només W→B pel 3306 i DMZ→D pel 53 | 3 |
-| | Bateria de proves des dels clients: DHCP, DNS, web, FTP i tallafocs | 1 |
-| | Documentar els clients, el tallafocs i les proves | 2 |
-| | Assaig final conjunt | 1 |
-| **Adam** | Acabar l'aplicació: taula HTML, paginació i cercador | 5 |
-| | Pujar l'aplicació al repositori i desplegar-la a W-N01 amb `git pull` | 1 |
-| | Proves de l'aplicació i accés amb bchecker a MySQL | 1 |
-| | Documentar l'aplicació | 2 |
-| | Assaig final conjunt | 1 |
-| **Marc** | Documentar el flux Git (`clone`, `add`, `commit`, `push`, `pull`) i la pujada a producció | 3 |
-| | Passar la documentació a l'arbre Markdown del repositori | 4 |
-| | Proves de la web, l'FTP i l'accés amb bchecker a W-N01 i F-N01 | 1 |
-| | Revisar que tota la documentació del repositori estigui completa | 1 |
-| | Assaig final conjunt | 1 |
+| Persona | Tasca |
+|---|---|
+| **Victor** | Crear els clients Windows i Linux, només amb ITB14 i per DHCP |
+| | Tallafocs a R-N01: de la DMZ cap a la Intranet només W→B pel 3306 i DMZ→D pel 53 |
+| | Bateria de proves des dels clients: DHCP, DNS, web, FTP i tallafocs |
+| | Documentar els clients, el tallafocs i les proves |
+| | Assaig final conjunt |
+| **Adam** | Acabar l'aplicació: taula HTML, paginació i cercador |
+| | Pujar l'aplicació al repositori i desplegar-la a W-N01 amb `git pull` |
+| | Proves de l'aplicació i accés amb bchecker a MySQL |
+| | Documentar l'aplicació |
+| | Assaig final conjunt |
+| **Marc** | Documentar el flux Git (`clone`, `add`, `commit`, `push`, `pull`) i la pujada a producció |
+| | Passar la documentació a l'arbre Markdown del repositori |
+| | Proves de la web, l'FTP i l'accés amb bchecker a W-N01 i F-N01 |
+| | Revisar que tota la documentació del repositori estigui completa |
+| | Assaig final conjunt |
 
 **Ordre de l'assaig final:** engegar les màquines en aquest ordre: R-N01, D-N01, B-N01, W-N01, F-N01 i després els clients. Després, passar totes les proves de principi a fi.
 
 ---
 
-## 6. Resum d'hores
-
-| Persona | Sprint 1 | Sprint 2 | Sprint 3 | Total |
-|---|---|---|---|---|
-| Victor | 10 h | 10 h | 10 h | 30 h |
-| Adam | 10 h | 10 h | 10 h | 30 h |
-| Marc | 10 h | 10 h | 10 h | 30 h |
