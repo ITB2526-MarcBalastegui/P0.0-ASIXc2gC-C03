@@ -23,7 +23,7 @@ S'han apuntat les adreces MAC perquè dins del sistema les interfícies es diuen
 
 La interfície Default és temporal: la DMZ ha de sortir a Internet a través de R-N01, no directament per Isard. Si es mantingués activa, el trànsit no passaria pel router i el tallafocs no serviria de res.
 
-![Paràmetres de W-N01 a Isard](/img/web/hardware_w-n01)
+![Paràmetres de W-N01 a Isard](img/web/hardware_w-n01)
 
 *Configuració de recursos i xarxes de l'escriptori W-N01 a IsardVDI.*
 
