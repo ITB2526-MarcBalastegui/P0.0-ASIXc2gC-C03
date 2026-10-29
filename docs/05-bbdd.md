@@ -47,8 +47,7 @@ sudo usermod -aG sudo bchecker
 
 **Figura 2** ·
 
-<!-- TODO: afegir la captura i descomentar la línia següent -->
-<!-- ![Fig02](img/bbdd/hostname-adduser.png) -->
+![Fig02](img/bbdd/hostname-adduser.png)
 
 *Canvi de hostname i creació de l'usuari bchecker.*
 
@@ -64,8 +63,7 @@ sudo apt update && sudo apt upgrade -y
 
 **Figura 3** ·
 
-<!-- TODO: afegir la captura i descomentar la línia següent -->
-<!-- ![Fig03](img/bbdd/timezone-apt-update.png) -->
+![Fig03](img/bbdd/timezone-apt-update.png)
 
 *Configuració de la zona horària i actualització del sistema.*
 
@@ -81,8 +79,7 @@ sudo systemctl enable --now ssh
 
 **Figura 4** ·
 
-<!-- TODO: afegir la captura i descomentar la línia següent -->
-<!-- ![Fig04](img/bbdd/ssh-install.png) -->
+![Fig04](img/bbdd/ssh-install.png)
 
 *Instal·lació i activació del servei SSH.*
 
