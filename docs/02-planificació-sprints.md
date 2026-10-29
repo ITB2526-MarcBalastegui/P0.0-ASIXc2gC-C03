@@ -1,5 +1,5 @@
 
-# 00 – Equip i planificació dels sprints
+# Equip i planificació dels sprints
 
 Aquest document explica com està organitzat el treball del grup, qui fa cada part, quines tasques té cadascú i com es reparteixen les hores en cada sprint.
 
@@ -24,12 +24,12 @@ Aquest document explica com està organitzat el treball del grup, qui fa cada pa
 
 ## 2. Planificació general
 
-El projecte es divideix en tres sprints. Cada persona disposa de **10 hores per sprint**, és a dir, **30 hores d'equip per sprint** i **90 hores en total**.
+El projecte es divideix en tres sprints:
 
 | Sprint | Objectiu | Resultat esperat al final |
 |---|---|---|
-| **1. Xarxa base i màquines** | Totes les màquines existeixen, tenen IP fixa i surten a Internet pel router | El router funciona amb NAT, i totes les màquines estan creades i configurades |
-| **2. Serveis** | Cada servei funciona de manera independent | DHCP i DNS, MySQL amb les dades del CSV, FTP, Apache i la clau SSH per al desplegament |
+| **1. Xarxa base i màquines** | Creació i configuració bàsica de tots els serveis, excepte DHCP i DNS | El router funciona amb NAT, i totes les màquines estan creades i configurades |
+| **2. Serveis** | Cada servei funciona corectament | DHCP i DNS, MySQL amb les dades del CSV, FTP, Apache i la clau SSH per al desplegament |
 | **3. Aplicació, seguretat i tancament** | Tot funciona de principi a fi i està provat | Aplicació web, tallafocs, clients, bateria de proves i documentació final |
 
 ### Dependències entre tasques
