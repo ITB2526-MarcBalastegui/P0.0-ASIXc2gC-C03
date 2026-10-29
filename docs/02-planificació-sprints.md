@@ -43,20 +43,23 @@ El projecte es divideix en tres sprints:
 
 ## 3. Sprint 1 – Xarxa base i màquines
 
-| Persona | Tasca | h |
-|---|---|---|
-| **Victor** | Crear el projecte i el backlog a ProofHub | 1 |
-| | Pla IP i diagrama d'arquitectura | 2 |
-| | Crear R-N01 des de la plantilla d'Isard: configuració base, interfícies, reenviament i NAT | 5 |
-| | Documentar el router i el pla IP | 2 |
-| **Adam** | Crear B-N01 des de la plantilla d'Isard amb IP 10.3.2.10 | 2 |
-| | Instal·lar MySQL i crear l'usuari bchecker amb accés remot | 3 |
-| | Descarregar el CSV, analitzar-lo i preparar l'esquema de la taula | 3 |
-| | Documentar B-N01 i MySQL | 2 |
-| **Marc** | Crear W-N01 i F-N01 des de la plantilla d'Isard amb IPs 10.3.1.20 i 10.3.1.10 | 3 |
-| | Crear el repositori GitHub i afegir-hi l'equip | 2 |
-| | Instal·lar Apache i PHP a W-N01 | 3 |
-| | Documentar W-N01, F-N01 i el repositori | 2 |
+| Persona | Tasca |
+|---|---|
+| **Victor** | Crear el projecte i el backlog a ProofHub |
+| | Creació del diagrama i anàlisi de serveis |
+| | Pla IP i diagrama d'arquitectura |
+| | Crear R-N01 des de la plantilla d'Isard: configuració base, interfícies, reenviament i NAT |
+| | Documentar el router i el pla IP |
+| **Adam** | Crear B-N01 des de la plantilla d'Isard amb IP 10.3.2.10 |
+| | Instal·lar MySQL i crear l'usuari bchecker amb accés remot |
+| | Descarregar el CSV, analitzar-lo i preparar l'esquema de la taula | 
+| | Documentar B-N01 i MySQL |
+| **Marc** |
+| | Creació del diagrama i anàlisi de serveis |
+| | Crear W-N01 i F-N01 des de la plantilla d'Isard amb IPs 10.3.1.20 i 10.3.1.10 |
+| | Crear el repositori GitHub amb l'esquema de directoris comoplet |
+| | Instal·lar Apache i PHP a W-N01 |
+| | Documentar W-N01 i F-N01 |
 
 ---
 
