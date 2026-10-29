@@ -25,8 +25,6 @@ El router és l'única màquina que té una interfície a cada xarxa, perquè é
 
 S'han apuntat les adreces MAC perquè dins del sistema les interfícies es diuen `enp1s0`, `enp2s0`, etc. Comparant les MAC és l'única manera segura de saber quina interfície correspon a cada xarxa abans de configurar les IPs.
 
-**Figura 1** · 
-
 ![Isard Xarxa](img/fig01-isard-xarxes-r-n01.png)
 
 *Configuració de recursos i xarxes de l'escriptori R-N01 a IsardVDI.*
@@ -47,8 +45,6 @@ sudo usermod -aG sudo bchecker
 - **`adduser bchecker`** crea l'usuari amb el seu directori personal i li assigna la contrasenya `bchecker121`. Els camps d'informació personal s'han deixat en blanc perquè no són necessaris. L'enunciat exigeix aquest usuari a tots els sistemes, per a la correcció.
 - **`usermod -aG sudo bchecker`** afegeix l'usuari al grup `sudo`, perquè pugui administrar la màquina. L'opció `-a` (*append*) és important: sense ella, l'usuari perdria la resta de grups als quals pertany.
 
-**Figura 2** · 
-
 ![Fig02](img/fig02-hostname-adduser.png)
 
 *Canvi de hostname i creació de l'usuari bchecker.*
@@ -61,9 +57,7 @@ sudo apt update && sudo apt upgrade -y
 ```
 
 - **Zona horària Europe/Madrid:** els logs del sistema i dels serveis han de tenir l'hora local. Si no, és difícil relacionar-los amb les proves i les captures, i en un context de seguretat és clau saber exactament quan ha passat cada cosa.
-- **`apt update`** actualitza la llista de paquets disponibles, i **`apt upgrade -y`** instal·la les actualitzacions pendents. Es fa abans de configurar cap servei, perquè la plantilla pot tenir paquets antics amb vulnerabilitats conegudes. Durant l'actualització, el sistema ha demanat el joc de caràcters de la consola i s'ha triat *Latin1 and Latin5*, que és el que suporta els accents del català i del castellà.
-
-**Figura 3** · 
+- **`apt update`** actualitza la llista de paquets disponibles, i **`apt upgrade -y`** instal·la les actualitzacions pendents. Es fa abans de configurar cap servei, perquè la plantilla pot tenir paquets antics amb vulnerabilitats conegudes. Durant l'actualització, el sistema ha demanat el joc de caràcters de la consola i s'ha triat *Latin1 and Latin5*, que és el que suporta els accents del català i del castellà. 
 
 ![Fig03](img/fig03-timezone-apt-update.png)
 
@@ -78,8 +72,6 @@ sudo systemctl enable --now ssh
 
 - El paquet `openssh-server` ja venia instal·lat a la plantilla, com indica el missatge *"already the newest version"*. Tot i així, s'executa l'ordre per assegurar-ho.
 - **`systemctl enable --now ssh`** arrenca el servei immediatament (`--now`) i el deixa activat perquè arrenqui sol en cada reinici (`enable`). Això és el que permet administrar el router en remot, i el que permetrà al professor entrar-hi amb l'usuari bchecker.
-
-**Figura 4** · 
 
 ![Fig04](img/fig04-ssh-install.png)
 
@@ -108,8 +100,6 @@ network:
         use-dns: false
 ```
 
-**Figura 6** · 
-
 ![Fig06](img/fig06-netplan-nano.png)
 
 *Fitxer de configuració de netplan editat amb nano.*
@@ -131,10 +121,9 @@ ip route
 | Usuari bchecker | uid 1001, inclòs al grup `27(sudo)` |
 | Zona horària | `Europe/Madrid (CEST, +0200)` |
 | Servei SSH | `active (running)` i `enabled` |
+| Netplan | Ip's de les interfícies i taula d'enrutament |
 
 A més, aquestes comprovacions ja s'han fet havent iniciat sessió com a **bchecker** (el prompt mostra `bchecker@R-N01`). Això demostra que l'usuari funciona i que pot fer servir `sudo`.
-
-**Figura 5 i 7** · 
 
 ![Fig05](img/fig05-comprovacio-base.png)
 ![Fig07](img/fig07-netplan-aplicat.png)
@@ -159,8 +148,6 @@ sudo sysctl --system
 ```bash
 sysctl net.ipv4.ip_forward
 ```
-
-**Figura 8** · 
 
 ![Fig08](img/fig08-ip-forwarding.png)
 
@@ -190,8 +177,6 @@ sudo iptables -t nat -L POSTROUTING -n -v
 ```
 
 Durant la configuració, el comptador es va mantenir a 0 mentre W-N01 tenia encara la ruta per defecte per la interfície Default. Això va passar perquè el trànsit no arribava al router. Quan la ruta va passar a ser via `10.3.1.1`, el NAT va començar a funcionar. Es van fer diversos pings per comprovar com el comptador pujava; en aquest cas el número és 6, perquè s'han realitzat 6 pings.
-
-**Figura 9** · 
 
 ![Fig09](img/fig09-nat-comptador.png)
 
