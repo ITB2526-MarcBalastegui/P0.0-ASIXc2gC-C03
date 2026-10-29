@@ -35,7 +35,7 @@ A la màquina li hem afegit dos adaptadors de xarxa:
 | `Default` | **Temporal.** Ens permet instal·lar els serveis mentre es configura el servidor DNS/DHCP. |
 | `ASIXC2-ITB14` | Xarxa interna que compartirà amb la resta de màquines del projecte. |
 
-![Maquinari de B-N01 a IsardVDI: 4 vCPU, 8 GB de memòria i els adaptadors Default i ASIXC2-ITB14](img/01-hardware-isard.png)
+![Maquinari de B-N01 a IsardVDI: 4 vCPU, 8 GB de memòria i els adaptadors Default i ASIXC2-ITB14](img//bbdd/01-hardware-isard.png)
 
 ---
 
@@ -67,7 +67,7 @@ network:
         addresses: [10.3.2.20]
 ```
 
-![Fitxer netplan de B-N01](img/02-netplan.png)
+![Fitxer netplan de B-N01](img/bbdd/02-netplan.png)
 
 Comprovem que les interfícies han rebut l'adreça esperada:
 
@@ -75,7 +75,7 @@ Comprovem que les interfícies han rebut l'adreça esperada:
 ip -br a
 ```
 
-![Sortida d'ip -br a: enp1s0 amb IP per DHCP i enp2s0 amb 10.3.2.10/24](img/03-ip-br-a.png)
+![Sortida d'ip -br a: enp1s0 amb IP per DHCP i enp2s0 amb 10.3.2.10/24](img/bbdd/03-ip-br-a.png)
 
 ### 2.2. Hostname i usuari
 
@@ -94,7 +94,7 @@ hostnamectl
 id bchecker
 ```
 
-![Sortida de hostnamectl i id bchecker](img/04-hostnamectl.png)
+![Sortida de hostnamectl i id bchecker](img/bbdd/04-hostnamectl.png)
 
 ### 2.3. Actualitzacions i SSH
 
@@ -132,7 +132,7 @@ sudo systemctl status mysql
 
 La captura mostra el servei en estat `active (running)`:
 
-![Estat del servei MySQL amb systemctl status](img/05-systemctl-mysql.png)
+![Estat del servei MySQL amb systemctl status](img/bbdd/05-systemctl-mysql.png)
 
 ### 3.2. Creació de la base de dades i de l'usuari
 
@@ -160,7 +160,7 @@ Finalment, comprovem que la base de dades s'ha creat correctament utilitzant el 
 mysql -u bchecker -pbchecker121 -e "SHOW DATABASES;"
 ```
 
-![Creació de la base de dades i comprovació amb l'usuari bchecker](img/06-mysql-creacio-bd.png)
+![Creació de la base de dades i comprovació amb l'usuari bchecker](img/bbdd/06-mysql-creacio-bd.png)
 
 ---
 
@@ -192,7 +192,7 @@ head -n 3 equipaments_educacio_utf8.csv
 wc -l equipaments_educacio_utf8.csv
 ```
 
-![Comprovació de la codificació, capçalera i nombre de línies](img/07-file-head-wc.png)
+![Comprovació de la codificació, capçalera i nombre de línies](img/bbdd/07-file-head-wc.png)
 
 > Les 2711 línies no equivalen a 2710 registres: alguns camps contenen salts de línia. El nombre real de registres el dona `csvstat --count`.
 
@@ -205,7 +205,7 @@ csvcut -d ';' -n equipaments_educacio_utf8.csv
 csvcut -t -n equipaments_educacio_utf8.csv
 ```
 
-![Proves de separador amb csvcut: en tots dos casos una sola columna](img/08-csvcut-separador.png)
+![Proves de separador amb csvcut: en tots dos casos una sola columna](img/bbdd/08-csvcut-separador.png)
 
 ### 4.4. Anàlisi de columnes i tipus
 
@@ -223,11 +223,11 @@ csvstat equipaments_educacio_utf8.csv > ~/data/csvstat_salida.txt
 
 Llista de columnes:
 
-![Llista numerada de les 40 columnes del CSV](img/09-csvcut-columnes.png)
+![Llista numerada de les 40 columnes del CSV](img/bbdd/09-csvcut-columnes.png)
 
 Fitxer `csvstat_salida.txt` obert amb `nano`:
 
-![Contingut de csvstat_salida.txt](img/10-csvstat-txt.png)
+![Contingut de csvstat_salida.txt](img/bbdd/10-csvstat-txt.png)
 
 ---
 
@@ -257,7 +257,7 @@ El fitxer generat automàticament conté diverses incongruències, per això l'h
 
 Un cop fets aquests canvis, el fitxer SQL queda a punt per executar-lo a la base de dades:
 
-![Fitxer create_table.sql corregit](img/11-create-table.png)
+![Fitxer create_table.sql corregit](img/bbdd/11-create-table.png)
 
 ### 5.2. Creació de la taula
 
@@ -276,7 +276,7 @@ csvsql -y 0 --db "mysql+pymysql://bchecker:bchecker121@localhost/equipaments" \
        --tables equipaments_educacio --no-create --insert equipaments_educacio_utf8.csv
 ```
 
-![Execució de la càrrega amb csvsql](img/12-carrega-csvsql.png)
+![Execució de la càrrega amb csvsql](img/bbdd/12-carrega-csvsql.png)
 
 ### 5.4. Correcció dels codis postals
 
@@ -303,4 +303,4 @@ mysql -u bchecker -pbchecker121 equipaments -e "SELECT register_id, name, addres
 
 Resultat: **2710 registres** carregats.
 
-![Comprovació final: recompte de registres i mostra de 5 files](img/13-verificacio-final.png)
+![Comprovació final: recompte de registres i mostra de 5 files](img/bbdd/13-verificacio-final.png)
