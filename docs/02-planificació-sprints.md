@@ -1,7 +1,7 @@
 
 # 00 – Equip i planificació dels sprints
 
-Aquest document explica com està organitzat el treball del grup G03: qui fa cada part, quines tasques té cadascú i com es reparteixen les hores en cada sprint.
+Aquest document explica com està organitzat el treball del grup, qui fa cada part, quines tasques té cadascú i com es reparteixen les hores en cada sprint.
 
 ---
 
@@ -13,13 +13,12 @@ Aquest document explica com està organitzat el treball del grup G03: qui fa cad
 | Adam Ben Mansor | Dades | B-N01 | MySQL, importació del CSV i aplicació web |
 | Marc Balastegui | Web i Git | W-N01, F-N01 | Servidor web, FTP, repositori GitHub i desplegament |
 
-**Criteri del repartiment.** Cada persona és responsable de la seva part de principi a fi: crea les seves màquines, les configura, les prova i en fa la documentació. Així no depèn de la feina dels altres per avançar, i el professor pot veure qui ha fet cada cosa.
-
+**Criteri del repartiment.** Cada persona és responsable de la seva part de principi a fi, crea les seves màquines, les configura, les prova i fa la documentació. Així no depèn de la feina dels altres per avançar.
 **Regles comunes a tot l'equip:**
 
-- **Configuració base** igual a totes les màquines: hostname, IP fixa, usuari `bchecker` amb sudo, SSH actiu i zona horària Europe/Madrid.
-- **Estructura de documentació** igual per a tothom: creació de la màquina (adaptadors i recursos), configuració base i serveis, cadascú amb la seva comprovació i captures.
-- **Tasques a ProofHub**, amb responsable, hores estimades i dependències marcades.
+- **Configuració base:** Igual a totes les màquines: hostname, IP fixa, usuari `bchecker` amb sudo, SSH actiu i zona horària Europe/Madrid.
+- **Estructura de documentació:** Igual per a tothom: creació de la màquina (adaptadors i recursos), configuració base i serveis, cadascú amb la seva comprovació i captures.
+- **Tasques a ProofHub:** Amb responsable, hores estimades i dependències marcades.
 
 ---
 
