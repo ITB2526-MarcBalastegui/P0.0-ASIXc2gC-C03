@@ -85,33 +85,7 @@ sudo systemctl enable --now ssh
 
 *Instal·lació i activació del servei SSH.*
 
-### 2.4 Comprovació
-
-```bash
-hostnamectl | grep hostname
-id bchecker
-timedatectl | grep "Time zone"
-systemctl status ssh
-```
-
-| Comprovació | Resultat obtingut |
-|---|---|
-| Hostname | `Static hostname: R-N01` |
-| Usuari bchecker | uid 1001, inclòs al grup `27(sudo)` |
-| Zona horària | `Europe/Madrid (CEST, +0200)` |
-| Servei SSH | `active (running)` i `enabled` |
-
-A més, aquestes comprovacions ja s'han fet havent iniciat sessió com a **bchecker** (el prompt mostra `bchecker@R-N01`). Això demostra que l'usuari funciona i que pot fer servir `sudo`.
-
-**Figura 5** · 
-
-![Fig05](img/fig05-comprovacio-base.png)
-
-*Comprovació final de la configuració base.*
-
-## 3. Serveis
-
-### 3.1 Configuració de xarxa (netplan)
+### 2.4 Configuració de xarxa (netplan)
 
 **Què fa.** Assigna a cada interfície la seva xarxa: la Default obté IP per DHCP d'Isard i és la sortida a Internet, mentre que ITB13 (DMZ) i ITB14 (Intranet) reben una IP fixa, que fa de *gateway* de cada xarxa. La VPN també obté IP per DHCP, però amb una mètrica més alta perquè la ruta per defecte continuï sortint per la Default.
 
@@ -140,15 +114,36 @@ network:
 
 *Fitxer de configuració de netplan editat amb nano.*
 
-**Comprovació.** Les IPs de cada interfície s'han de correspondre amb la taula d'adreçament, i `ip route` ha de tenir una sola ruta `default`, per `enp1s0`.
+### 2.5 Comprovació
 
-**Figura 7** · 
+```bash
+hostnamectl | grep hostname
+id bchecker
+timedatectl | grep "Time zone"
+systemctl status ssh
+ip -br a
+ip route
+```
 
+| Comprovació | Resultat obtingut |
+|---|---|
+| Hostname | `Static hostname: R-N01` |
+| Usuari bchecker | uid 1001, inclòs al grup `27(sudo)` |
+| Zona horària | `Europe/Madrid (CEST, +0200)` |
+| Servei SSH | `active (running)` i `enabled` |
+
+A més, aquestes comprovacions ja s'han fet havent iniciat sessió com a **bchecker** (el prompt mostra `bchecker@R-N01`). Això demostra que l'usuari funciona i que pot fer servir `sudo`.
+
+**Figura 5 i 7** · 
+
+![Fig05](img/fig05-comprovacio-base.png)
 ![Fig07](img/fig07-netplan-aplicat.png)
 
-*Aplicació del netplan i sortida de `ip -br a` i `ip route`.*
+*Comprovació final de la configuració base.*
 
-### 3.2 Reenviament de paquets (IP forwarding)
+## 3. Serveis
+
+### 3.1 Reenviament de paquets (IP forwarding)
 
 **Què fa.** Permet al router passar paquets d'una xarxa a l'altra. Sense aquest reenviament, R-N01 només respondria per a ell mateix, i les màquines de la DMZ i la Intranet no es veurien.
 
@@ -171,7 +166,7 @@ sysctl net.ipv4.ip_forward
 
 *Aplicació del reenviament de paquets i valor de `net.ipv4.ip_forward`.*
 
-### 3.3 NAT (MASQUERADE)
+### 3.2 NAT (MASQUERADE)
 
 **Què fa.** Permet que les màquines de la DMZ i la Intranet surtin a Internet. Les seves IPs són privades (10.3.x.x) i Internet no sap tornar-hi, així que el router canvia l'origen dels paquets per la seva pròpia IP de la Default. Les respostes tornen al router i ell les reenvia a la màquina que les ha demanat.
 
