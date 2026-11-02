@@ -68,7 +68,7 @@ sudo systemctl enable --now ssh
 - El paquet `openssh-server` ja venia instal·lat a la plantilla, com indica el missatge *"already the newest version"*. Tot i així, s'executa l'ordre per assegurar-ho.
 - **`systemctl enable --now ssh`** arrenca el servei immediatament (`--now`) i el deixa activat perquè arrenqui sol en cada reinici (`enable`). Això permet administrar D-N01 en remot, i el professor hi pot entrar amb l'usuari bchecker.
 
-![Fig04](img/d-n01-fig04-ssh-install.png)
+![Fig04](img/d-n01-fig04-ssh.png)
 
 *Instal·lació i activació del servei SSH.*
 
