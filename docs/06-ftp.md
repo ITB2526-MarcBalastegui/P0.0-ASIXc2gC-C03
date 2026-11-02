@@ -150,4 +150,45 @@ A més, aquestes comprovacions ja s'han fet havent iniciat sessió com a **bchec
 
 ### 3.1 Servidor FTP (vsftpd)
 
-Pendent del Sprint 2: instal·lació de vsftpd amb l'usuari bchecker, engabiat al seu directori (*chroot*) i amb un rang fix de ports passius perquè funcioni a través del router.
+**Què fa.** vsftpd és el servidor FTP, pensat perquè els usuaris hi puguin pujar i baixar fitxers. S'ha configurat perquè només hi entrin usuaris del sistema (no anònims), que quedin tancats a la seva pròpia carpeta i amb un rang fix de ports passius, que és el que permetrà obrir l'FTP al tallafocs del Sprint 3 sense obrir tota la màquina.
+
+FTP fa servir dues connexions, la del port 21, per on viatgen les comandes i una de dades per on viatgen els fitxers. En mode passiu la connexió de dades la fa  el client cap  a un port del servidor dins d'un rang. Per això fixem el rang (40000-40100): així, el tallafocs sap quins ports ha d'obrir.
+
+ 
+**Configuració**
+ 
+Instal·lació:
+ 
+```bash
+sudo apt install -y vsftpd
+```
+Carpeta de l'FTP. vsftpd es nega a arrencar si l'usuari pot escriure a la carpeta on queda tancat (chroot), per seguretat. Per això l'arrel (`ftp/`) no és escrivible i a dins hi ha una subcarpeta (`files/`) on sí es pot pujar:
+
+```bash
+sudo mkdir -p /home/bchecker/ftp/files
+sudo chown nobody:nogroup /home/bchecker/ftp
+sudo chmod a-w /home/bchecker/ftp
+sudo chown bchecker:bchecker /home/bchecker/ftp/files
+```
+Fitxer `/etc/vsftpd.conf` ([`config/F-N01/vsftpd.conf`](../config/F-N01/vsftpd.conf)):
+
+```conf
+listen=YES
+listen_ipv6=NO
+ 
+anonymous_enable=NO
+local_enable=YES
+write_enable=YES
+ 
+chroot_local_user=YES
+user_sub_token=$USER
+local_root=/home/$USER/ftp
+ 
+pasv_enable=YES
+pasv_min_port=40000
+pasv_max_port=40100
+```
+- **`anonymous_enable=NO`:** no s'admet accés anònim. Només usuaris del sistema amb contrasenya, ja que només ens interessa que entri `bchecker`
+- **`local_enable=YES` i `write_enable=YES`:** permet l'accés amb usuaris locals i que puguin pujar fitxers.
+- **`chroot_local_user=YES` amb `local_root`:** tanca cada usuari a `/home/<usuari>/ftp`. No pot sortir d'aquesta carpeta ni veure la resta del sistema.
+- **`pasv_min_port` i `pasv_max_port`:** rang fix de ports per a la connexió de dades en mode passiu.
