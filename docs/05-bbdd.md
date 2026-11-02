@@ -348,3 +348,136 @@ mysql -u bchecker -pbchecker121 equipaments -e "SELECT register_id, name, addres
 ![Fig16](img/bbdd/13-verificacio-final.png)
 
 *Recompte de registres i mostra de 5 files de la taula `equipaments_educacio`.*
+
+### 3.7 Usuari per a l'aplicació web
+
+**Què fa.** La base de dades ja està tècnicament configurada, però l'usuari `bchecker` només és vàlid des de `localhost`. Per això cal crear un usuari independent, `appweb`, que serà el que faran servir el servidor web W-N01 per consultar la taula. Aquest usuari només es podrà utilitzar des de la màquina W-N01: en lloc de definir-lo com a `localhost`, s'associa a la IP del servidor web (`10.3.1.20`). Així, encara que algú conegués la contrasenya, MySQL rebutjaria qualsevol connexió que no vingui d'aquesta adreça.
+
+A més, se li concedeix el privilegi mínim imprescindible: només `SELECT` sobre la taula `equipaments_educacio`. L'aplicació web només ha de mostrar dades, de manera que no necessita ni inserir, ni modificar, ni esborrar (principi de mínim privilegi).
+
+**Configuració.** S'accedeix a la consola de MySQL amb `sudo` i s'executen les ordres següents:
+
+```bash
+sudo mysql
+```
+
+```sql
+CREATE USER 'appweb'@'10.3.1.20' IDENTIFIED BY 'appweb121';
+
+GRANT SELECT ON equipaments.equipaments_educacio TO 'appweb'@'10.3.1.20';
+
+FLUSH PRIVILEGES;
+```
+
+
+![Fig17](img/bbdd/14-mysql-create-user-appweb.png)
+
+*Creació de l'usuari `appweb` associat a la IP de W-N01 i assignació del privilegi `SELECT`.*
+
+**Comprovació.** Es verifiquen els privilegis de l'usuari nou i es consulta la taula d'usuaris de MySQL, on `appweb` ha d'aparèixer amb l'host `10.3.1.20` i `bchecker` amb `localhost`.
+
+```sql
+SHOW GRANTS FOR 'appweb'@'10.3.1.20';
+
+SELECT user, host FROM mysql.user WHERE user IN ('bchecker', 'appweb');
+```
+
+| Comprovació | Resultat esperat |
+|---|---|
+| Privilegis d'`appweb` | `GRANT USAGE ON *.*` i `GRANT SELECT ON equipaments.equipaments_educacio` |
+| Usuaris i hosts | `appweb` @ `10.3.1.20` i `bchecker` @ `localhost` |
+
+
+![Fig18](img/bbdd/15-show-grants-appweb.png)
+
+*Privilegis d'`appweb` i llistat d'usuaris amb el seu host.*
+
+### 3.8 Accés remot a MySQL
+
+**Què fa.** Per defecte, MySQL només escolta a `127.0.0.1`, de manera que només accepta connexions locals. Perquè W-N01 (que és a la DMZ) pugui connectar-s'hi pel port 3306, cal fer que el servei escolti a la IP de la Intranet del servidor, `10.3.2.10`.
+
+**Configuració.** S'edita el fitxer `/etc/mysql/mysql.conf.d/mysqld.cnf` i es canvia el paràmetre `bind-address` de `127.0.0.1` a `10.3.2.10`:
+
+```bash
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+```
+
+```ini
+bind-address            = 10.3.2.10
+mysqlx-bind-address     = 127.0.0.1
+```
+
+La línia `mysqlx-bind-address` es deixa tal com està, ja que correspon al protocol X de MySQL (port 33060), que no és necessari per al projecte i continua restringit a l'equip local.
+
+Cal tenir en compte que `bind-address` indica la interfície de xarxa on el servei escolta, no qui hi pot accedir. Qui pot connectar-se realment ho decideixen dues capes més: l'host definit a cada usuari de MySQL (apartat anterior) i el firewall (apartat següent).
+
+
+![Fig19](img/bbdd/16-bind-address.png)
+
+*Fitxer `mysqld.cnf` editat amb nano amb el nou valor de `bind-address`.*
+
+Per aplicar el canvi cal reiniciar el servei:
+
+```bash
+sudo systemctl restart mysql
+```
+
+**Comprovació.** Amb `ss -tlpn` es comprova que el port 3306 escolta a la IP del servidor (`10.3.2.10`) i ja no a `127.0.0.1`.
+
+```bash
+ss -tlpn | grep 3306
+```
+
+| Comprovació | Resultat esperat |
+|---|---|
+| Port 3306 | `LISTEN` a `10.3.2.10:3306` |
+| Port 33060 (protocol X) | `LISTEN` només a `127.0.0.1:33060` |
+
+
+![Fig20](img/bbdd/17-ss-tlpn.png)
+
+*Reinici de MySQL i comprovació del port 3306 amb `ss -tlpn`.*
+
+### 3.9 Firewall
+
+**Què fa.** Un cop MySQL és accessible per xarxa, cal protegir el servidor sense deixar-lo exposat. Es configura el firewall amb UFW seguint una política restrictiva: es denega tot el trànsit entrant per defecte i només es permeten les connexions imprescindibles:
+
+- **SSH (port 22):** per poder administrar el servidor en remot i perquè el professor pugui accedir amb l'usuari `bchecker`.
+- **MySQL (port 3306):** només des de la IP de W-N01 (`10.3.1.20`), que és l'única màquina que ha de consultar la base de dades.
+
+**Configuració.** Es defineix primer la política per defecte i després les excepcions. És important permetre SSH **abans** d'activar el firewall; en cas contrari, es tancaria la sessió remota actual i es perdria l'accés al servidor.
+
+```bash
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+
+sudo ufw allow 22/tcp
+sudo ufw allow from 10.3.1.20 to any port 3306 proto tcp
+
+sudo ufw enable
+```
+
+**Comprovació.** Es consulta l'estat del firewall. Ha de figurar com a actiu, amb la regla de SSH i la de MySQL restringida a `10.3.1.20`.
+
+```bash
+sudo ufw status verbose
+```
+
+Per validar l'accés des del servidor web, es prova la connexió des de W-N01 amb l'usuari `appweb`. Ha de permetre consultar la taula, mentre que qualsevol altra connexió al port 3306 des d'una IP diferent ha de ser rebutjada.
+
+```bash
+# Des de W-N01 (10.3.1.20)
+mysql -h 10.3.2.10 -u appweb -pappweb121 equipaments -e "SELECT COUNT(*) FROM equipaments_educacio;"
+```
+
+| Comprovació | Resultat esperat |
+|---|---|
+| Estat d'UFW | `Status: active`, política d'entrada `deny` |
+| SSH | `22/tcp` permès |
+| MySQL | `3306/tcp` permès només des de `10.3.1.20` |
+| Consulta des de W-N01 | `2710` registres |
+
+
+![Fig21](img/bbdd/18-ufw-status.png)
+
+*Estat del firewall amb `ufw status verbose`.*
