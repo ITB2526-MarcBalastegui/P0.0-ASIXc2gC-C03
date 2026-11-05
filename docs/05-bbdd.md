@@ -515,7 +515,7 @@ WHERE register_id NOT REGEXP '^[0-9]+$';
 ```
  
 <!-- TODO: afegir la captura i descomentar la línia següent -->
-<!-- ![Fig25](img/bbdd/update-bom.png) -->
+[Fig25](img/bbdd/update-bom.png)
  
 *Detecció i correcció del BOM al camp register_id.*
  
@@ -545,9 +545,4 @@ SHOW INDEX FROM equipaments_educacio;
 ```
  
 Han d'aparèixer els tres índexs nous, a més de la clau primària. Cal tenir en compte que la cerca per text de l'aplicació (`LIKE '%text%'`) no aprofita aquests índexs, perquè el patró comença amb un comodí; per això l'optimització beneficia els filtres i l'agrupació, no el cercador.
- 
- 
-<!-- TODO: afegir la captura i descomentar la línia següent -->
-<!-- ![Fig26](img/bbdd/alter-index.png) -->
- 
-*Índexs creats a la taula equipaments_educacio.*
+
