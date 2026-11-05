@@ -292,7 +292,7 @@ sudo named-checkconf
 sudo systemctl restart bind9
 sudo systemctl status bind9
 ```
-![FigD18](img/dns-dchp/d-n01-fig18-check-status.png)
+![FigD18](img/dns-dhcp/d-n01-fig18-check-status.png)
 
 Quan el DNS funciona, D-N01 deixa de fer servir el DNS temporal 8.8.8.8 del netplan i es fa servir a si mateix. Al fitxer /etc/netplan/50-cloud-init.yaml, el camp nameservers passa a 127.0.0.1, i després s'aplica amb sudo netplan apply.
 
