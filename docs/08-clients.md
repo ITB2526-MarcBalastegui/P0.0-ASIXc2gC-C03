@@ -66,6 +66,10 @@ ipconfig /renew
 ipconfig /all
 ```
 
+![FigC6](img/clients/clients-fig06-release-renew.png)
+
+*Alliberament i renovació d'Ip*
+
 | Paràmetre | Valor obtingut |
 |---|---|
 | Adreça IPv4 | 10.3.2.103 |
@@ -80,6 +84,6 @@ La IP està dins del rang del DHCP i els paràmetres coincideixen amb la configu
 
 ![FigC5](img/clients/clients-fig02-ipconfig-windows.png)
 
-*Alliberament i renovació de la IP i sortida de `ipconfig /all` al client Windows.*
+*Sortida de `ipconfig /all` al client Windows.*
 
 ### 3.2 Client DHCP Linux
