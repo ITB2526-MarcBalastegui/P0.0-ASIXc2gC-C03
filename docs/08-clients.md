@@ -60,6 +60,8 @@ sudo hostnamectl set-hostname PC-Linux
 
 ![FigC7](img/clients/clients-fig07-conf-dhcp.png)
 
+*Adaptador de xarxa del client Windows en DHCP*
+
 **Comprovació.** Des de la consola de Windows, es demana una IP nova i es comprova la configuració rebuda:
 
 ```
