@@ -242,7 +242,7 @@ mysql -h 10.3.2.10 -u appweb -p equipaments -e "SELECT COUNT(*) FROM equipaments
  
  
 <!-- TODO: afegir la captura i descomentar la línia següent -->
-<!-- ![Fig10](img/web/proves-connexio-bd.png) -->
+[Fig10](img/web/proves-connexio-bd.png)
  
 *Comprovació de la connexió de W-N01 cap a la base de dades de B-N01.*
  
@@ -339,7 +339,7 @@ sudo cp index.php /var/www/html/index.php
  
  
 <!-- TODO: afegir la captura i descomentar la línia següent -->
-<!-- ![Fig12](img/web/desplegament-fitxers.png) -->
+[Fig12](img/web/desplegament-fitxers.png)
  
 *Fitxers de l'aplicació i de la configuració a W-N01.*
  
@@ -384,7 +384,7 @@ curl -s http://localhost | grep -o "Equipaments d'educació" | head -n 1
 Si el navegador continua mostrant la pàgina antiga, es força la recàrrega amb `Ctrl+F5`, ja que pot tenir-la a la memòria cau.
  
 <!-- TODO: afegir la captura i descomentar la línia següent -->
-<!-- ![Fig13](img/web/apache-directoryindex.png) -->
+[Fig13](img/web/apache-directoryindex.png)
  
 *Configuració de DirectoryIndex i comprovació amb `apache2ctl configtest` i `curl`.*
  
