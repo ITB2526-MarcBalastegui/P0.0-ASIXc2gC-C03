@@ -178,3 +178,142 @@ systemctl status isc-dhcp-server
 
 *Estat del servei DHCP a D-N01 i interfície on escolta.*
 
+### 3.2 Servidor DNS (bind9)
+
+**Què fa.** Tradueix els noms de les màquines del projecte a IP, i són els clients els que li demanen. Té una zona directa (g03.intra, de nom a IP) i dues zones inverses (de IP a nom), una per a la DMZ i una per a la Intranet. Les consultes de noms externs (per exemple, google.com) es reenvien al DNS públic 8.8.8.8, perquè les màquines internes puguin navegar.
+
+**Configuració.** S'instal·la bind9 i es defineixen les opcions generals, les zones i els registres.
+
+```bash
+sudo apt update
+sudo apt install -y bind9 bind9utils dnsutils
+sudo systemctl status bind9
+```
+
+![FigD12](img/dns-dhcp/d-n01-fig12-bind9-install.png)
+
+*Instal·lació de bind9 i estat del servei.*
+
+Opcions generals, al fitxer /etc/bind/named.conf.options. El servidor escolta a la seva IP i a localhost, accepta consultes de les dues xarxes i reenvia a 8.8.8.8:
+
+```bash
+options {
+    directory "/var/cache/bind";
+    listen-on { 127.0.0.1; 10.3.2.20; };
+    allow-query { localhost; 10.3.1.0/24; 10.3.2.0/24; };
+    recursion yes;
+    allow-recursion { localhost; 10.3.1.0/24; 10.3.2.0/24; };
+    forwarders { 8.8.8.8; };
+    dnssec-validation auto;
+};
+```
+
+Zones, al fitxer /etc/bind/named.conf.local: una zona directa i dues zones inverses, perquè la DMZ (10.3.1.0/24) i la Intranet (10.3.2.0/24) tenen cadascuna la seva subxarxa:
+
+```bash
+zone "g03.intra" {
+    type master;
+    file "/etc/bind/db.g03.intra";
+};
+
+zone "2.3.10.in-addr.arpa" {
+    type master;
+    file "/etc/bind/db.10.3.2";
+};
+
+zone "1.3.10.in-addr.arpa" {
+    type master;
+    file "/etc/bind/db.10.3.1";
+};
+```
+
+![Fig13](img/dns-dhcp/d-n01-fig13-named-options-local.png)
+
+*Fitxers named.conf.options i named.conf.local editats i validats amb named-checkconf.*
+
+Registres de la zona directa, al fitxer /etc/bind/db.g03.intra. El serial s'ha d'incrementar cada vegada que es canvia el fitxer, perquè els canvis es propaguin:
+
+```bash
+$TTL 3600
+@       IN  SOA  D-N01.g03.intra. admin.g03.intra. (
+                 2026110501 ; serial (AAAAMMDDnn)
+                 3600       ; refresh
+                 900        ; retry
+                 604800     ; expire
+                 300 )      ; negative cache
+@       IN  NS     D-N01.g03.intra.
+D-N01   IN  A      10.3.2.20
+R-N01   IN  A      10.3.2.1
+R       IN  CNAME  R-N01
+B-N01   IN  A      10.3.2.10
+F-N01   IN  A      10.3.1.10
+W-N01   IN  A      10.3.1.20
+```
+
+Validació de la zona directa:
+
+```bash
+sudo named-checkzone g03.intra /etc/bind/db.g03.intra
+```
+
+![FigD14](img/dns-dhcp/d-n01-fig14-zona-directa.png)
+
+*Fitxer de la zona directa db.g03.intra, validat amb named-checkzone.*
+
+Registres de les zones inverses, als fitxers /etc/bind/db.10.3.2 (Intranet) i /etc/bind/db.10.3.1 (DMZ). Cada fitxer té el mateix encapçalament SOA i NS que la zona directa, i només canvien els PTR:
+
+```bash
+; db.10.3.2 (Intranet)
+1       IN  PTR  R-N01.g03.intra.
+10      IN  PTR  B-N01.g03.intra.
+20      IN  PTR  D-N01.g03.intra.
+
+; db.10.3.1 (DMZ)
+1       IN  PTR  R-N01.g03.intra.
+10      IN  PTR  F-N01.g03.intra.
+20      IN  PTR  W-N01.g03.intra.
+```
+
+Validació de les zones inverses:
+
+```bash
+sudo named-checkzone 2.3.10.in-addr.arpa /etc/bind/db.10.3.2
+sudo named-checkzone 1.3.10.in-addr.arpa /etc/bind/db.10.3.1
+```
+
+![FigD15](img/dns-dhcp/d-n01-fig15-zona-inversa.png)
+
+*Fitxers de les zones inverses de la Intranet i la DMZ, validats amb named-checkzone.*
+
+Abans de reiniciar el servei, es valida la configuració completa i es reinicia bind9:
+
+```bash
+sudo named-checkconf
+sudo systemctl restart bind9
+sudo systemctl status bind9
+```
+![FigD18](img/dns-dchp/d-n01-fig18-check-status.png)
+
+Quan el DNS funciona, D-N01 deixa de fer servir el DNS temporal 8.8.8.8 del netplan i es fa servir a si mateix. Al fitxer /etc/netplan/50-cloud-init.yaml, el camp nameservers passa a 127.0.0.1, i després s'aplica amb sudo netplan apply.
+
+![FigD17](img/dns-dhcp/d-n01-fig17-netplan-dns.png)
+
+*Netplan amb el DNS de la màquina apuntant a 127.0.0.1.*
+
+**Comprovació.** Les consultes es fan a la IP de D-N01 (10.3.2.20) per comprovar cada part del servei: els registres directes, l'àlies, els inversos i el reenviament cap a Internet.
+
+```bash
+dig @10.3.2.20 D-N01.g03.intra +short
+dig @10.3.2.20 R.g03.intra +short
+dig @10.3.2.20 -x 10.3.2.10 +short
+dig @10.3.2.20 www.google.com +short
+Consulta	Resultat obtingut
+D-N01.g03.intra	10.3.2.20
+R.g03.intra	Àlies de R-N01.g03.intra., que resol a 10.3.2.1
+-x 10.3.2.10 (PTR)	B-N01.g03.intra.
+www.google.com	Diverses IPs públiques (142.251.x.x), cosa que demostra que el reenviament a 8.8.8.8 funciona
+```
+
+![FigD16](img/dns-dhcp/d-n01-fig16-dig-comprovacio.png)
+
+*Respostes de dig per als registres directes, l'àlies, el PTR i el reenviament cap a Internet.*
