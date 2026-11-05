@@ -56,7 +56,9 @@ sudo hostnamectl set-hostname PC-Linux
 
 **Què fa.** El client demana la seva configuració de xarxa a D-N01. Rep una IP del rang 10.3.2.100–200, el gateway 10.3.2.1 i el DNS 10.3.2.20. D'aquesta manera, el client no necessita cap configuració manual i rep els mateixos paràmetres que la resta de la Intranet.
 
-**Configuració.** L'adaptador està en mode automàtic (DHCP), i no té IP fixa. A Windows és la configuració per defecte. Al Linux, el netplan ha de tenir `dhcp4: true` a l'adaptador de la Intranet.
+**Configuració.** L'adaptador està en mode automàtic (DHCP), i no té IP fixa. A Windows és la configuració per defecte.
+
+![FigC7](img/clients/clients-fig07-conf-dhcp.png)
 
 **Comprovació.** Des de la consola de Windows, es demana una IP nova i es comprova la configuració rebuda:
 
