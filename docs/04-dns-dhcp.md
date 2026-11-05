@@ -307,12 +307,15 @@ dig @10.3.2.20 D-N01.g03.intra +short
 dig @10.3.2.20 R.g03.intra +short
 dig @10.3.2.20 -x 10.3.2.10 +short
 dig @10.3.2.20 www.google.com +short
-Consulta	Resultat obtingut
-D-N01.g03.intra	10.3.2.20
-R.g03.intra	Àlies de R-N01.g03.intra., que resol a 10.3.2.1
--x 10.3.2.10 (PTR)	B-N01.g03.intra.
-www.google.com	Diverses IPs públiques (142.251.x.x), cosa que demostra que el reenviament a 8.8.8.8 funciona
 ```
+
+| Consulta | Resultat obtingut |
+| --- | --- |
+| D-N01.g03.intra	| 10.3.2.20 |
+| R.g03.intra	| Àlies de R-N01.g03.intra., que resol a 10.3.2.1 |
+| -x 10.3.2.10 (PTR) | B-N01.g03.intra. |
+| www.google.com |	Diverses IPs públiques (142.251.x.x), cosa que demostra que el reenviament a 8.8.8.8 funciona. |
+
 
 ![FigD16](img/dns-dhcp/d-n01-fig16-dig-comprovacio.png)
 
