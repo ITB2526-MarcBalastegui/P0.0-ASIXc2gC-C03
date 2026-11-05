@@ -207,6 +207,9 @@ options {
     dnssec-validation auto;
 };
 ```
+![Fig16](img/dns-dhcp/d-n01-fig16-named-options.png)
+
+*Fitxer named.conf.options editat i validat amb named-checkconf*
 
 Zones, al fitxer /etc/bind/named.conf.local: una zona directa i dues zones inverses, perquè la DMZ (10.3.1.0/24) i la Intranet (10.3.2.0/24) tenen cadascuna la seva subxarxa:
 
@@ -227,9 +230,9 @@ zone "1.3.10.in-addr.arpa" {
 };
 ```
 
-![Fig13](img/dns-dhcp/d-n01-fig13-named-options-local.png)
+![Fig13](img/dns-dhcp/d-n01-fig13-named-local.png)
 
-*Fitxers named.conf.options i named.conf.local editats i validats amb named-checkconf.*
+*Fitxer named.conf.local editat i validat amb named-checkconf.*
 
 Registres de la zona directa, al fitxer /etc/bind/db.g03.intra. El serial s'ha d'incrementar cada vegada que es canvia el fitxer, perquè els canvis es propaguin:
 
