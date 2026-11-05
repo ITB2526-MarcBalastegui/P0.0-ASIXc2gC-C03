@@ -1,4 +1,4 @@
-# 07 – Clients Windows i Linux
+# Clients Windows i Linux
 
 Els clients són les màquines de la Intranet que reben la configuració de xarxa per DHCP des de D-N01. Només tenen l'adaptador de la Intranet (ASIXC2-ITB14), i la prova consisteix a comprovar que obtenen IP del rang, gateway i DNS correctes, i que poden resoldre els noms del projecte.
 
