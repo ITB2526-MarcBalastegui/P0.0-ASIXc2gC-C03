@@ -192,3 +192,42 @@ pasv_max_port=40100
 - **`local_enable=YES` i `write_enable=YES`:** permet l'accés amb usuaris locals i que puguin pujar fitxers.
 - **`chroot_local_user=YES` amb `local_root`:** tanca cada usuari a `/home/<usuari>/ftp`. No pot sortir d'aquesta carpeta ni veure la resta del sistema.
 - **`pasv_min_port` i `pasv_max_port`:** rang fix de ports per a la connexió de dades en mode passiu.
+
+Activació del servei:
+ 
+```bash
+sudo systemctl restart vsftpd
+sudo systemctl enable vsftpd
+```
+- **`restart`** aplica la nova configuració del fitxer `/etc/vsftpd.conf`.
+- **`enable`** fa que el servei arrenqui sol en cada reinici de la màquina.
+
+### 3.2 Comprovació
+ 
+La prova es fa des del client **PC-Linux**, tal com demana l'enunciat: des d'una màquina de la Intranet, bchecker entra per FTP a F-N01 (DMZ), puja un fitxer i el baixa. Com que Intranet → DMZ està permès al disseny, la connexió funciona. S'usa `lftp`, que fa servir mode passiu per defecte (el que hem configurat).
+ 
+```bash
+lftp -u bchecker,bchecker121 10.3.1.10
+cd files
+put /etc/hostname
+ls
+get hostname -o /tmp/baixat.txt
+exit
+cat /tmp/baixat.txt
+```
+ 
+| Comprovació | Resultat obtingut |
+|---|---|
+| Servei vsftpd | `active (running)` i `enabled` |
+| Connexió Intranet → DMZ | PC-Linux es connecta a F-N01 (10.3.1.10) |
+| Accés de bchecker | Entra amb usuari i contrasenya |
+| Chroot | A l'arrel només es veu `files`; l'usuari no surt de la seva carpeta |
+| Pujada (`put`) | `9 bytes transferred`, `hostname` apareix al `ls` |
+| Baixada (`get`) | `cat /tmp/baixat.txt` mostra `PC-Linux` |
+ 
+El fitxer baixat conté `PC-Linux` perquè s'ha pujat el `/etc/hostname` del propi client: això demostra que el fitxer ha fet el viatge sencer client → F-N01 → client.
+ 
+![Prova de l'FTP des del PC Linux](img/ftp/lftp-comprovacio)
+ 
+*Pujada i baixada per FTP a F-N01 des del client PC-Linux (Intranet).*
+
