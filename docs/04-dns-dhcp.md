@@ -134,7 +134,7 @@ A més, aquestes comprovacions ja s'han fet havent iniciat sessió com a **bchec
 ```bash
 INTERFACESv4="enp1s0"
 ```
-![Fig12](docs/img/dns-dhcp/d-n01-fig09-dhcp-interficie.png)
+![Fig09](img/dns-dhcp/d-n01-fig09-dhcp-interficie.png)
 
 El rang i les opcions es defineixen al fitxer /etc/dhcp/dhcpd.conf:
 
@@ -150,7 +150,7 @@ subnet 10.3.2.0 netmask 255.255.255.0 {
     max-lease-time 7200;
 }
 ```
-![Fig10](docs/img/dns-dhcp/d-n01-fig10-dhcpd-conf.png)
+![Fig10](img/dns-dhcp/d-n01-fig10-dhcpd-conf.png)
 
 El domini és g03.intra i no g03.local, perquè .local està reservat per a mDNS i pot donar problemes de resolució.
 
@@ -167,7 +167,7 @@ sudo systemctl enable --now isc-dhcp-server
 systemctl status isc-dhcp-server
 ```
 
-![Fig08](docs/img/dns-dhcp/d-n01-fig08-dhcp-status.png)
+![Fig08](img/dns-dhcp/d-n01-fig08-dhcp-status.png)
 
 *Estat del servei DHCP a D-N01 i interfície on escolta.*
 
