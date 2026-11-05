@@ -481,3 +481,73 @@ mysql -h 10.3.2.10 -u appweb -pappweb121 equipaments -e "SELECT COUNT(*) FROM eq
 ![Fig21](img/bbdd/18-ufw-status.png)
 
 *Estat del firewall amb `ufw status verbose`.*
+
+### 3.10 Correcció i optimització de la taula
+ 
+Un cop l'aplicació web va començar a consumir les dades, es van detectar i resoldre dues qüestions a la taula `equipaments_educacio`. Aquestes ordres s'executen amb l'usuari `bchecker`, ja que `appweb` no té permisos d'escriptura.
+ 
+#### Correcció del BOM al camp `register_id` (UPDATE)
+ 
+**Què passa.** Al fer clic sobre el primer equipament del llistat, la pàgina de detall no s'obria. L'adreça mostrava `id=%EF%BB%BF99400695180`: els bytes `EF BB BF` són un **BOM** (*byte order mark*), un caràcter invisible que s'havia enganxat al principi del `register_id` de la primera fila. Probablement procedeix del fitxer original en UTF-16, que començava amb un BOM que la conversió a UTF-8 va conservar. És la mateixa mena d'incidència que la dels codis postals: no es veu a simple vista, però fa que el valor no coincideixi amb el que s'espera.
+ 
+**Detecció.** Es busquen els `register_id` que no siguin únicament dígits:
+ 
+```sql
+SELECT id, register_id, HEX(LEFT(register_id, 3)) AS inici
+FROM equipaments_educacio
+WHERE register_id NOT REGEXP '^[0-9]+$';
+```
+ 
+**Correcció.** S'elimina el BOM només de les files afectades:
+ 
+```sql
+UPDATE equipaments_educacio
+SET register_id = REPLACE(register_id, UNHEX('EFBBBF'), '')
+WHERE register_id LIKE CONCAT(UNHEX('EFBBBF'), '%');
+```
+ 
+**Comprovació.** Tornant a executar la consulta de detecció, no ha de retornar cap fila, i el comptatge d'identificadors incorrectes ha de ser 0:
+ 
+```sql
+SELECT COUNT(*) AS incorrectes
+FROM equipaments_educacio
+WHERE register_id NOT REGEXP '^[0-9]+$';
+```
+ 
+<!-- TODO: afegir la captura i descomentar la línia següent -->
+<!-- ![Fig25](img/bbdd/update-bom.png) -->
+ 
+*Detecció i correcció del BOM al camp register_id.*
+ 
+#### Índexs per accelerar les consultes (ALTER TABLE)
+ 
+**Què fa.** L'aplicació agrupa els resultats per equipament i filtra per districte i per nivell educatiu. Per agilitzar aquestes operacions s'afegeixen índexs sobre les columnes implicades. Amb 2710 files l'efecte no és gran, però és la pràctica correcta i deixa la taula preparada per a més dades.
+ 
+| Índex | Columna | Per a què serveix |
+|---|---|---|
+| `idx_register` | `register_id` | Agrupar per equipament i obrir la fitxa de detall |
+| `idx_district` | `addresses_district_name` | Filtre per districte |
+| `idx_filter` | `secondary_filters_name` | Filtre per nivell educatiu |
+ 
+**Configuració.**
+ 
+```sql
+ALTER TABLE equipaments_educacio
+  ADD INDEX idx_register (register_id),
+  ADD INDEX idx_district (addresses_district_name),
+  ADD INDEX idx_filter (secondary_filters_name);
+```
+ 
+**Comprovació.**
+ 
+```sql
+SHOW INDEX FROM equipaments_educacio;
+```
+ 
+Han d'aparèixer els tres índexs nous, a més de la clau primària. Cal tenir en compte que la cerca per text de l'aplicació (`LIKE '%text%'`) no aprofita aquests índexs, perquè el patró comença amb un comodí; per això l'optimització beneficia els filtres i l'agrupació, no el cercador.
+ 
+ 
+<!-- TODO: afegir la captura i descomentar la línia següent -->
+<!-- ![Fig26](img/bbdd/alter-index.png) -->
+ 
+*Índexs creats a la taula equipaments_educacio.*
