@@ -123,3 +123,51 @@ A més, aquestes comprovacions ja s'han fet havent iniciat sessió com a **bchec
 
 *Comprovació final de la configuració base i de la xarxa.*
 
+## 3. Serveis
+
+### 3.1 Servidor DHCP
+
+**Què fa.** Assigna automàticament la configuració de xarxa als clients de la Intranet: IP dins del rang 10.3.2.100–200, gateway 10.3.2.1 i DNS 10.3.2.20. Així els clients no necessiten configuració manual, i la configuració és la mateixa per a tothom.
+
+**Configuració.** El servei només escolta a enp1s0 (la interfície de la Intranet), perquè no ofereixi IPs a la DMZ, que va amb IP fixa. Això s'indica al fitxer /etc/default/isc-dhcp-server:
+
+```bash
+INTERFACESv4="enp1s0"
+```
+![Fig12](docs/img/dns-dhcp/d-n01-fig09-dhcp-interficie.png)
+
+El rang i les opcions es defineixen al fitxer /etc/dhcp/dhcpd.conf:
+
+```bash
+authoritative;
+
+subnet 10.3.2.0 netmask 255.255.255.0 {
+    range 10.3.2.100 10.3.2.200;
+    option routers 10.3.2.1;
+    option domain-name-servers 10.3.2.20;
+    option domain-name "g03.intra";
+    default-lease-time 600;
+    max-lease-time 7200;
+}
+```
+![Fig10](docs/img/dns-dhcp/d-n01-fig10-dhcpd-conf.png)
+
+El domini és g03.intra i no g03.local, perquè .local està reservat per a mDNS i pot donar problemes de resolució.
+
+Després d'editar el fitxer, es comprova la sintaxi i s'arrenca el servei:
+
+```bash
+sudo dhcpd -t -cf /etc/dhcp/dhcpd.conf
+sudo systemctl enable --now isc-dhcp-server
+```
+
+**Comprovació.** La sortida de systemctl status ha de mostrar active (running), i el servei ha d'escoltar a enp1s0, dins de 10.3.2.0/24.
+
+```bash
+systemctl status isc-dhcp-server
+```
+
+![Fig08](docs/img/dns-dhcp/d-n01-fig08-dhcp-status.png)
+
+*Estat del servei DHCP a D-N01 i interfície on escolta.*
+
