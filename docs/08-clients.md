@@ -78,7 +78,7 @@ ipconfig /all
 
 La IP està dins del rang del DHCP i els paràmetres coincideixen amb la configuració de D-N01.
 
-**Figura C2** · `docs/img/clients-fig02-ipconfig-windows.png`
+![FigC5](img/clients/clients-fig02-ipconfig-windows.png)
 
 *Alliberament i renovació de la IP i sortida de `ipconfig /all` al client Windows.*
 
