@@ -11,34 +11,48 @@ Els dos clients es creen a IsardVDI, cadascun amb un únic adaptador a la Intran
 | PC Windows | 1 | ASIXC2-ITB14 | 52:54:00:5B:E1:ED | DHCP |
 | PC Linux | 1 | ASIXC2-ITB14 | Pendent | DHCP |
 
-**Figura C1** · `docs/img/clients-fig01-isard-windows.png` *(pendent)*
+![FigC1](img/clients/clients-fig01-isard-windows.png)
 
 *Configuració de xarxa del client Windows a IsardVDI.*
 
+![FigC2](img/clients/clients-fig02-isard-linux.png)
+
+*Configuració de xarxa del client Linux a IsardVDI.*
+
 ## 2. Configuració base
 
-### 2.1 Usuari bchecker al client Windows
+### 2.1 Usuari bchecker i hostname al client Windows
 
-Com a les altres màquines, el client Windows ha de tenir l'usuari `bchecker` amb permisos d'administrador, perquè el professor pugui corregir-lo. Des de PowerShell oberta com a administrador:
+Com a les altres màquines, el client Windows ha de tenir l'usuari `bchecker` amb permisos d'administrador i hostname personalitzat. Des de PowerShell oberta com a administrador:
 
 ```powershell
 net user bchecker CONTRASENYA /add
-net localgroup Administradors bchecker /add
+net localgroup Administradores bchecker /add
+Rename-Computer -NewName "PC-Windows" -Restart
 ```
 
-La contrasenya és la que es comunica al professor per separat. A la captura s'ha retallat perquè no aparegui al repositori.
+![FigC3](img/clients/clients-fig03-usuari-hostname-windows.png)
 
-**Figura C3** · `docs/img/clients-fig03-usuari-windows.png`
-
-*Creació de l'usuari bchecker i afegit al grup d'administradors.*
+*Creació de l'usuari bchecker i afegit al grup d'administradors i hostname.*
 
 ### 2.2 Configuració base del client Linux
 
-*Pendent.* Hostname, usuari bchecker, zona horària, actualització i SSH, seguint el mateix procediment que D-N01 i R-N01.
+S'ha creat l'usuari bchecker al client Linux amb permisos d'administrador i s'ha editat el hostname de la màquina a PC-Linux
+
+```bash
+sudo useradd -m -s /bin/bash bchecker
+sudo passwd bchecker
+sudo usermod -aG sudo bchecker
+sudo hostnamectl set-hostname PC-Linux
+```
+
+![FigC4](img/clients/clients-fig04-usuari-hostname-linux.png)
+
+*Creació de l'usuari bchecker amb permisos de sudo i canvi de hostname*
 
 ## 3. Serveis
 
-### 3.1 Client DHCP
+### 3.1 Client DHCP Windows
 
 **Què fa.** El client demana la seva configuració de xarxa a D-N01. Rep una IP del rang 10.3.2.100–200, el gateway 10.3.2.1 i el DNS 10.3.2.20. D'aquesta manera, el client no necessita cap configuració manual i rep els mateixos paràmetres que la resta de la Intranet.
 
@@ -68,8 +82,4 @@ La IP està dins del rang del DHCP i els paràmetres coincideixen amb la configu
 
 *Alliberament i renovació de la IP i sortida de `ipconfig /all` al client Windows.*
 
-Al client Linux, la comprovació serà la mateixa. *Pendent: captures i resultats.*
-
-**Figura C4** · `docs/img/clients-fig04-isard-linux.png` *(pendent)*
-
-*Configuració de xarxa del client Linux a IsardVDI.*
+### 3.2 Client DHCP Linux
