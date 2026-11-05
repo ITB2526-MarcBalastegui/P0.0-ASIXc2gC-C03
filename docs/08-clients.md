@@ -91,3 +91,47 @@ La IP està dins del rang del DHCP i els paràmetres coincideixen amb la configu
 *Sortida de `ipconfig /all` al client Windows.*
 
 ### 3.2 Client DHCP Linux
+
+**Què fa.** El client demana la seva configuració de xarxa a D-N01. Rep una IP del rang 10.3.2.100–200, el gateway 10.3.2.1 i el DNS 10.3.2.20. Igual que el client Windows, no necessita cap configuració manual.
+
+**Configuració.** L'adaptador de la Intranet (`enp1s0`) està en mode DHCP, sense IP fixa. Al fitxer de netplan (`/etc/netplan/50-cloud-init.yaml`) només hi ha `dhcp4: true` per a aquesta interfície:
+
+```yaml
+network:
+  version: 2
+  ethernets:
+    enp1s0:
+      dhcp4: true
+```
+
+Després d'editar el fitxer, s'aplica la configuració amb `sudo netplan apply`.
+
+![FigC8](img/clients/clients-fig08-conf-dhcp-linux.png)
+
+*Fitxer de netplan del client Linux amb l'adaptador en DHCP.*
+
+**Comprovació.** Des del terminal del client Linux, es comprova la IP, la ruta per defecte i el DNS rebuts:
+
+```bash
+ip -br a
+ip route
+resolvectl status enp1s0
+ping -c 2 D-N01.g03.intra
+```
+
+| Paràmetre | Valor esperat | Valor obtingut |
+|---|---|---|
+| Adreça IPv4 (`enp1s0`) | 10.3.2.100–200 | *pendent* |
+| Gateway (ruta per defecte) | 10.3.2.1 | *pendent* |
+| Servidor DNS | 10.3.2.20 | *pendent* |
+| Sufix DNS | g03.intra | *pendent* |
+
+La IP ha d'estar dins del rang del DHCP, i els paràmetres han de coincidir amb la configuració de D-N01. El `ping` a `D-N01.g03.intra` demostra que el client resol noms a través del DNS.
+
+![FigC9](img/clients/clients-fig09-ip-route-linux.png)
+
+*Sortida de `ip -br a` i `ip route` al client Linux.*
+
+![FigC10](img/clients/clients-fig10-dns-linux.png)
+
+*Sortida de `resolvectl status` i `ping` a `D-N01.g03.intra`.*
