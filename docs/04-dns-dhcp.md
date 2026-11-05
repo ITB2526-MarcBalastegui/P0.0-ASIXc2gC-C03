@@ -135,6 +135,7 @@ A més, aquestes comprovacions ja s'han fet havent iniciat sessió com a **bchec
 INTERFACESv4="enp1s0"
 ```
 ![Fig09](img/dns-dhcp/d-n01-fig09-dhcp-interficie.png)
+
 *Fitxer de configuració d'interfície*
 
 El rang i les opcions es defineixen al fitxer /etc/dhcp/dhcpd.conf:
@@ -152,6 +153,7 @@ subnet 10.3.2.0 netmask 255.255.255.0 {
 }
 ```
 ![Fig10](img/dns-dhcp/d-n01-fig10-dhcpd-conf.png)
+
 *Fitxer de configuració dhcpd.conf*
 
 El domini és g03.intra i no g03.local, perquè .local està reservat per a mDNS i pot donar problemes de resolució.
@@ -162,6 +164,9 @@ Després d'editar el fitxer, es comprova la sintaxi i s'arrenca el servei:
 sudo dhcpd -t -cf /etc/dhcp/dhcpd.conf
 sudo systemctl enable --now isc-dhcp-server
 ```
+![Fig10](img/dns-dhcp/d-n01-fig11-dhcpd-sintaxi-enable.png)
+
+*Comprovació de la sintaxi i arrencada del servei*
 
 **Comprovació.** La sortida de systemctl status ha de mostrar active (running), i el servei ha d'escoltar a enp1s0, dins de 10.3.2.0/24.
 
