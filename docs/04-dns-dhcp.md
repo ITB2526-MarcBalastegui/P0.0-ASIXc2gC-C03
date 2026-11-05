@@ -123,39 +123,3 @@ A més, aquestes comprovacions ja s'han fet havent iniciat sessió com a **bchec
 
 *Comprovació final de la configuració base i de la xarxa.*
 
-## 3. Serveis
-
-### 3.1 Servidor DHCP
-
-Què fa. Assigna automàticament la configuració de xarxa als clients de la Intranet: IP dins del rang 10.3.2.100–200, gateway 10.3.2.1 i DNS 10.3.2.20. Així els clients no necessiten configuració manual, i la configuració és la mateixa per a tothom.
-
-Configuració. El servei només escolta a enp1s0 (la interfície de la Intranet), perquè no ofereixi IPs a la DMZ, que va amb IP fixa. Això s'indica al fitxer /etc/default/isc-dhcp-server:
-
-INTERFACESv4="enp1s0"
-
-El rang i les opcions es defineixen a /etc/dhcp/dhcpd.conf:
-
-authoritative;
-
-subnet 10.3.2.0 netmask 255.255.255.0 {
-    range 10.3.2.100 10.3.2.200;
-    option routers 10.3.2.1;
-    option domain-name-servers 10.3.2.20;
-    option domain-name "g03.intra";
-    default-lease-time 600;
-    max-lease-time 7200;
-}
-
-El domini és g03.intra i no g03.local, perquè .local està reservat per a mDNS i pot donar problemes de resolució.
-
-Comprovació. Després de validar la sintaxi amb sudo dhcpd -t -cf /etc/dhcp/dhcpd.conf, el servei s'arrenca amb sudo systemctl enable --now isc-dhcp-server. La sortida de systemctl status ha de mostrar active (running) i que el servei escolta a enp1s0, dins de 10.3.2.0/24.
-
-Fig08
-
-Estat del servei DHCP a D-N01 i interfície on escolta.
-
-Quan hi hagi un client a la Intranet, es pot provar que rep IP del rang. Això s'afegirà a la bateria de proves del Sprint 3.
-
-### 3.2 Servidor DNS (bind9)
-
-*Pendent.* Zona directa i inversa, registres de totes les màquines i reenviament a un DNS públic.
