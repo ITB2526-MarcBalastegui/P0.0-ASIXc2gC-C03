@@ -51,8 +51,6 @@ Rename-Computer -NewName "PC-Windows" -Restart
 - **`net localgroup Administradores bchecker /add`** afegeix l'usuari al grup d'administradors locals, l'equivalent al grup `sudo` de Linux. El nom del grup depèn de l'idioma del sistema: en un Windows en anglès és `Administrators`.
 - **`Rename-Computer -NewName "PC-Windows" -Restart`** canvia el nom de l'equip i el reinicia, perquè a Windows el nou nom no s'aplica fins al reinici.
 
-**Comprovació.** Després del reinici, `hostname` ha de mostrar `PC-Windows`, i `net user bchecker` ha de mostrar el grup `*Administradores` entre els grups locals de l'usuari.
-
 ![Usuari i hostname Windows](img/clients/clients-fig03-usuari-hostname-windows.png)
 
 *Creació de l'usuari bchecker, afegit al grup d'administradors i canvi de hostname a PC-Windows.*
@@ -72,8 +70,6 @@ sudo hostnamectl set-hostname PC-Linux
 - **`passwd bchecker`** li assigna la contrasenya. `useradd`, a diferència d'`adduser`, no la demana.
 - **`usermod -aG sudo bchecker`** afegeix l'usuari al grup `sudo` perquè pugui administrar la màquina. L'opció `-a` evita que perdi la resta de grups.
 - **`hostnamectl set-hostname PC-Linux`** canvia el nom de la màquina de forma persistent. Es veu al prompt quan es torna a iniciar sessió.
-
-**Comprovació.** `hostnamectl` ha de mostrar `Static hostname: PC-Linux`, i `id bchecker` ha d'incloure el grup `sudo`.
 
 ![Usuari i hostname Linux](img/clients/clients-fig04-usuari-hostname-linux.png)
 
