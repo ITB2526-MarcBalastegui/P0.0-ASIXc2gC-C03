@@ -24,7 +24,7 @@ L'objectiu és muntar una infraestructura completa, provar-la i documentar-la. E
 |---|---|
 | [01 – Arquitectura](docs/01-arquitectura.md) | Anàlisi i justificació de serveis, pla d'adreçament, interfícies i diagrama de la xarxa |
 | [02 - Planificació d'sprints](docs/02-planificació-sprints.md) | Planificació i anàlisi dels sprints |
-| [03 – Router R-N01](docs/03-router.md) | Creació, configuració base, netplan, reenviament i NAT |
+| [03 – Router R-N01](docs/03-router.md) | Reenviament, NAT i Tallafocs a R-N01 |
 | [04 – DNS i DHCP](docs/04-dns-dhcp.md) | Servidor DNS (bind9) i DHCP a D-N01 |
 | [05 – Base de dades](docs/05-bbdd.md) | MySQL a B-N01, esquema i importació del CSV |
 | [06 – FTP](docs/06-ftp.md) | Servidor vsftpd a F-N01 |
