@@ -161,7 +161,7 @@ resolvectl status
 
 ![IP i ruta Linux](img/clients/clients-fig09-ip-route-linux.png)
 
-*Sortida de `ip -br a` i `ip route` al client Linux.*
+*Sortida de `ip -br a`, `ip route` i `resolvectl status` al client Linux.*
 
 **Resolució de noms.** Igual que amb Windows, es resol un nom intern i un d'extern:
 
@@ -174,7 +174,7 @@ El primer `ping` ha de resoldre a `10.3.2.10` i respondre. El segon demostra que
 
 ![DNS Linux](img/clients/clients-fig10-dns-linux.png)
 
-*Sortida de `resolvectl status` i dels `ping` per nom des del client Linux.*
+*Sortida dels `ping` per nom des del client Linux.*
 
 ### 3.3 Comprovació des del servidor DHCP
 
