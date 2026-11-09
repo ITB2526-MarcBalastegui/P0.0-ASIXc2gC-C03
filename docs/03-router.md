@@ -1,6 +1,6 @@
 # R-N01 – Router
 
-R-N01 és el router de la infraestructura. Connecta la DMZ i la Intranet entre elles i amb Internet, fa NAT perquè les màquines internes puguin sortir a l'exterior, i més endavant farà de tallafocs entre les dues xarxes. És la primera màquina que es desplega, perquè la resta depenen d'ella per tenir connectivitat.
+R-N01 és el router de la infraestructura. Connecta la DMZ i la Intranet entre elles i amb Internet, fa NAT perquè les màquines internes puguin sortir a l'exterior, i fa de tallafocs entre les dues xarxes. És la primera màquina que es desplega, perquè la resta depenen d'ella per tenir connectivitat.
 
 ## 1. Creació de la màquina
 
@@ -42,7 +42,7 @@ sudo usermod -aG sudo bchecker
 ```
 
 - **`hostnamectl set-hostname`** canvia el nom de la màquina de forma persistent. El nom segueix la nomenclatura del projecte i és el que després resoldrà el DNS. El prompt no canvia fins que es torna a iniciar sessió, per això a la captura encara es veu `ubuntu2404`.
-- **`adduser bchecker`** crea l'usuari amb el seu directori personal i li assigna la contrasenya `bchecker121`. Els camps d'informació personal s'han deixat en blanc perquè no són necessaris. L'enunciat exigeix aquest usuari a tots els sistemes, per a la correcció.
+- **`adduser bchecker`** crea l'usuari amb el seu directori personal i li assigna la contrasenya que es comunica al professor per separat. Els camps d'informació personal s'han deixat en blanc perquè no són necessaris. L'enunciat exigeix aquest usuari a tots els sistemes, per a la correcció.
 - **`usermod -aG sudo bchecker`** afegeix l'usuari al grup `sudo`, perquè pugui administrar la màquina. L'opció `-a` (*append*) és important: sense ella, l'usuari perdria la resta de grups als quals pertany.
 
 ![Fig02](img/router/fig02-hostname-adduser.png)
@@ -181,3 +181,106 @@ Durant la configuració, el comptador es va mantenir a 0 mentre W-N01 tenia enca
 ![Fig09](img/router/fig09-nat-comptador.png)
 
 *Comptador de la regla MASQUERADE després dels pings a 8.8.8.8 des de W-N01.*
+
+### 3.3 Tallafocs
+
+**Què fa.** Controla el trànsit que travessa el router entre la DMZ i la Intranet. La DMZ conté els servidors exposats, i per tant és la zona amb més risc de ser atacada. Si un atacant comprometés una màquina de la DMZ, el tallafocs li impediria arribar a la Intranet, excepte pels dos serveis imprescindibles:
+
+| Origen | Destí | Port | Acció | Motiu |
+|---|---|---|---|---|
+| W-N01 (10.3.1.20) | B-N01 (10.3.2.10) | 3306/tcp | Permès | L'aplicació web consulta MySQL |
+| DMZ (10.3.1.0/24) | D-N01 (10.3.2.20) | 53/udp i 53/tcp | Permès | Les màquines de la DMZ fan servir el DNS |
+| DMZ (10.3.1.0/24) | Intranet (10.3.2.0/24) | Qualsevol altre | Bloquejat | Aïllar la Intranet de la zona exposada |
+| Intranet | DMZ i Internet | Qualsevol | Permès | Els clients han d'accedir a la web i a l'FTP |
+
+**Configuració.** Les regles s'afegeixen a la cadena `FORWARD` de la taula `filter`, que és la que s'aplica als paquets que travessen el router. No es toca la cadena `INPUT`, de manera que l'accés per SSH al mateix router no es veu afectat. L'ordre és important, perquè iptables avalua les regles de dalt a baix i aplica la primera que coincideix:
+
+```bash
+sudo iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+sudo iptables -A FORWARD -s 10.3.1.20 -d 10.3.2.10 -p tcp --dport 3306 -j ACCEPT
+sudo iptables -A FORWARD -s 10.3.1.0/24 -d 10.3.2.20 -p udp --dport 53 -j ACCEPT
+sudo iptables -A FORWARD -s 10.3.1.0/24 -d 10.3.2.20 -p tcp --dport 53 -j ACCEPT
+sudo iptables -A FORWARD -s 10.3.1.0/24 -d 10.3.2.0/24 -j DROP
+```
+
+1. **ESTABLISHED,RELATED:** deixa passar les respostes de les connexions ja permeses. Per exemple, quan un client de la Intranet obre la web de W-N01, la resposta va de la DMZ a la Intranet, i sense aquesta regla la bloquejaria l'última.
+2. **W-N01 → B-N01, 3306/tcp:** només el servidor web, i no tota la DMZ, pot connectar-se a MySQL.
+3. **DMZ → D-N01, 53/udp:** consultes DNS normals.
+4. **DMZ → D-N01, 53/tcp:** el DNS fa servir TCP per a les respostes grans.
+5. **DMZ → Intranet, DROP:** la resta del trànsit de la DMZ cap a la Intranet es descarta. S'ha triat `DROP` i no `REJECT` perquè no doni cap resposta a l'origen, i així un possible atacant no sap si hi ha màquines darrere.
+
+El trànsit que no coincideix amb cap regla (de la Intranet cap a la DMZ, i de les dues xarxes cap a Internet) segueix la política per defecte de la cadena, `ACCEPT`, i el NAT de l'apartat 3.2 continua funcionant igual.
+
+Les regles es fan persistents amb `netfilter-persistent`, igual que la del NAT:
+
+```bash
+sudo netfilter-persistent save
+```
+
+![Fig10](img/router/fig10-tallafocs-regles.png)
+
+*Creació de les regles del tallafocs, llistat de la cadena FORWARD i desat persistent.*
+
+**Comprovació.** Les proves es fan des de les màquines de la DMZ i de la Intranet, no des del router: el trànsit que surt del mateix R-N01 passa per la cadena `OUTPUT` i no per `FORWARD`, i per tant no passaria pel tallafocs.
+
+Des de F-N01, que no ha de poder arribar a la Intranet excepte al DNS:
+
+```bash
+ping -c 2 -W 2 10.3.2.10
+nc -zv -w 3 10.3.2.10 3306
+dig @10.3.2.20 B-N01.g03.intra +short
+```
+
+![Fig11](img/router/fig11-tallafocs-f-n01.png)
+
+*Proves des de F-N01: ping i MySQL bloquejats, DNS permès.*
+
+Des de W-N01, que només ha de poder arribar a B-N01 pel port 3306:
+
+```bash
+nc -zv -w 3 10.3.2.10 3306
+ping -c 2 -W 2 10.3.2.10
+```
+
+![Fig12](img/router/fig12-tallafocs-w-n01.png)
+
+*Proves des de W-N01: connexió a MySQL permesa, ping bloquejat.*
+
+Des d'un client de la Intranet, que ha de poder arribar a la DMZ:
+
+```bash
+ping -c 2 10.3.1.20
+```
+
+![Fig13](img/router/fig13-tallafocs-client.png)
+
+*Prova des de PC-Linux cap a W-N01.*
+
+| Prova | Resultat obtingut | Esperat |
+|---|---|---|
+| F-N01 → B-N01 (ping) | 100% packet loss | Bloquejat |
+| F-N01 → B-N01:3306 | `timed out` | Bloquejat |
+| F-N01 → D-N01:53 (`dig`) | `10.3.2.10` | Permès |
+| W-N01 → B-N01:3306 | `succeeded` | Permès |
+| W-N01 → B-N01 (ping) | 100% packet loss | Bloquejat |
+| PC-Linux → W-N01 (ping) | Respon, `ttl=63` | Permès |
+
+El `ttl=63` del client indica que el paquet ha travessat un encaminador, el router, que li ha restat 1 al valor inicial de 64.
+
+Finalment, al router, els comptadors de cada regla confirmen per on ha passat el trànsit de les proves:
+
+```bash
+sudo iptables -L FORWARD -n -v --line-numbers
+```
+
+| Regla | Paquets | Interpretació |
+|---|---|---|
+| 1. ESTABLISHED,RELATED | 5396 | Respostes de totes les connexions permeses |
+| 2. W-N01 → B-N01:3306 | 1 | El `nc` de W-N01 |
+| 3. DMZ → D-N01:53/udp | 2 | El `dig` de F-N01 |
+| 4. DMZ → D-N01:53/tcp | 0 | Cap, perquè el `dig` ha fet servir UDP |
+| 5. DMZ → Intranet DROP | 12 | Els pings i el `nc` bloquejats |
+
+![Fig14](img/router/fig14-tallafocs-comptadors.png)
+
+*Comptadors de les regles de la cadena FORWARD després de les proves.*
