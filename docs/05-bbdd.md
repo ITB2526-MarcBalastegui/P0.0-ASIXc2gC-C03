@@ -515,7 +515,7 @@ WHERE register_id NOT REGEXP '^[0-9]+$';
 ```
  
 <!-- TODO: afegir la captura i descomentar la línia següent -->
-[Fig25](img/bbdd/update-bom.png)
+![Fig25](img/bbdd/update-bom.png)
  
 *Detecció i correcció del BOM al camp register_id.*
  
