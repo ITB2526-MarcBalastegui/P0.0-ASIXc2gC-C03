@@ -27,7 +27,7 @@ La MAC coincideix amb l'adreça física que mostra `ipconfig /all` dins de Windo
 
 | Adaptador | Xarxa d'Isard | MAC | Configuració |
 |---|---|---|---|
-| 1 | ASIXC2-ITB14 | *pendent* | DHCP |
+| 1 | ASIXC2-ITB14 | 52:54:00:4f:de:0f | DHCP |
 
 ![Isard client Linux](img/clients/clients-fig02-isard-linux.png)
 
