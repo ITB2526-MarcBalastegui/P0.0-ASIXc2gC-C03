@@ -154,10 +154,10 @@ resolvectl status
 
 | Paràmetre | Valor esperat | Valor obtingut |
 |---|---|---|
-| Adreça IPv4 | Dins del rang 10.3.2.100–200 | *pendent* |
-| Gateway (ruta per defecte) | 10.3.2.1 | *pendent* |
-| Servidor DNS | 10.3.2.20 | *pendent* |
-| Domini de cerca | g03.intra | *pendent* |
+| Adreça IPv4 | Dins del rang 10.3.2.100–200 | 10.3.2.104 |
+| Gateway (ruta per defecte) | 10.3.2.1 | 10.3.2.1 |
+| Servidor DNS | 10.3.2.20 | 10.3.2.20 |
+| Domini de cerca | g03.intra | g03.intra |
 
 ![IP i ruta Linux](img/clients/clients-fig09-ip-route-linux.png)
 
@@ -170,7 +170,7 @@ ping -c 2 B-N01.g03.intra
 ping -c 2 www.google.com
 ```
 
-El primer `ping` ha de resoldre a `10.3.2.10` i respondre. El segon demostra que el client resol noms d'Internet a través de D-N01 i que hi surt pel router.
+El primer `ping` ha de resoldre a `10.3.2.10` i respondre. El segon demostra que el client resol noms d'Internet a través de D-N01 i que surt pel router.
 
 ![DNS Linux](img/clients/clients-fig10-dns-linux.png)
 
