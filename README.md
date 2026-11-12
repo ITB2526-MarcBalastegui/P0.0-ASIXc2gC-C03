@@ -31,3 +31,4 @@ L'objectiu és muntar una infraestructura completa, provar-la i documentar-la. E
 | [07 – Servidor web](docs/07-web.md) | Apache i aplicació a W-N01 |
 | [08 – Clients](docs/08-clients.md) | Clients Windows i Linux a la Intranet |
 | [09 – Proves](docs/09-proves.md) | Bateria de proves de tots els serveis |
+| [10 – Flux Git](docs/10-git.md) | Control de versions |
