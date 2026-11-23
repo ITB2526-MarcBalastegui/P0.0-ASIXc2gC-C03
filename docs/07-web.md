@@ -426,6 +426,6 @@ sudo tail -n 20 /var/log/apache2/error.log
 sudo tail -n 20 /var/log/apache2/access.log
 ```
 
-![Fig14](img/web/02-web-versio-final)
+![Fig14](img/web/02-web-versio-final.png)
 
 *Versió definitiva de l'aplicació, accedint només amb la IP de W-N01.*
