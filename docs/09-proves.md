@@ -50,8 +50,8 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 | ID | Prova | Des d'on | Ordre | Esperat | Obtingut |
 |---|---|---|---|---|---|
 | P08 | Configuració rebuda al Windows | PC-Windows | `ipconfig /all` | IP del rang 10.3.2.100–200, gateway 10.3.2.1, DNS 10.3.2.20, sufix `g03.intra` | 10.3.2.103, 10.3.2.1, 10.3.2.20, `g03.intra` |
-| P09 | Configuració rebuda al Linux | PC-Linux | `ip -br a`, `ip route`, `resolvectl status` | El mateix | 10.3.2.104, 10.3.2.1, 10.3.2.20, `g03.intra` |
-| P10 | Concessions al servidor | D-N01 | `dhcp-lease-list` | `52:54:00:5b:e1:ed` (Windows) → 10.3.2.103 i `52:54:00:4f:de:0f` (Linux) → 10.3.2.104 | *per confirmar a la captura* |
+| P09 | Configuració rebuda al Linux | PC-Linux | `ip -br a`, `ip route`, `resolvectl status` | P del rang 10.3.2.100–200, gateway 10.3.2.1, DNS 10.3.2.20, sufix g03.intra | 10.3.2.104, 10.3.2.1, 10.3.2.20, `g03.intra` |
+| P10 | Concessions al servidor | D-N01 | `dhcp-lease-list` | `52:54:00:5b:e1:ed` (Windows) → 10.3.2.103 i `52:54:00:4f:de:0f` (Linux) → 10.3.2.104 | `52:54:00:5b:e1:ed` → 10.3.2.103 (`PC-Windows`) i `52:54:00:4f:de:0f` → 10.3.2.104 (`PC-Linux`) |
 
 ![ipconfig Windows](img/clients/clients-fig02-ipconfig-windows.png)
 
