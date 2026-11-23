@@ -106,7 +106,5 @@ El projecte es divideix en tres sprints:
 | **Marc** | Documentar el flux Git (`clone`, `add`, `commit`, `push`, `pull`) i la pujada a producció |
 | | Assaig final conjunt |
 
-**Ordre de l'assaig final:** engegar les màquines en aquest ordre: R-N01, D-N01, B-N01, W-N01, F-N01 i després els clients. Després, passar totes les proves de principi a fi.
-
 ---
 
