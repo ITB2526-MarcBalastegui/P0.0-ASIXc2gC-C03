@@ -33,15 +33,15 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 ![Accés amb bchecker a W-N01](img/proves/SSH-W-N01.png)
 ![Accés amb bchecker a F-N01](img/proves/SSH-F-N01.png)
 
-*P01–P05: connexió per SSH amb bchecker des de PC-Linux a cada servidor.*
+*Connexió per SSH amb bchecker des de PC-Linux a cada servidor.*
 
 ![Usuari bchecker al Windows](img/clients/clients-fig03-usuari-hostname-windows.png)
 
-*P06: creació de l'usuari bchecker al client Windows i afegit al grup d'administradors.*
+*Creació de l'usuari bchecker al client Windows i afegit al grup d'administradors.*
 
 ![Usuari bchecker a MySQL](img/bbdd/06-mysql-creacio-bd.png)
 
-*P07: l'usuari bchecker veu la base de dades equipaments.*
+*L'usuari bchecker veu la base de dades equipaments.*
 
 ### 2.2 DHCP
 
@@ -55,15 +55,15 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 
 ![ipconfig Windows](img/clients/clients-fig02-ipconfig-windows.png)
 
-*P08: configuració rebuda pel client Windows.*
+*Configuració rebuda pel client Windows.*
 
 ![IP i ruta Linux](img/clients/clients-fig09-ip-route-linux.png)
 
-*P09: configuració rebuda pel client Linux.*
+*Configuració rebuda pel client Linux.*
 
 ![Concessions D-N01](img/clients/clients-fig12-leases-d-n01.png)
 
-*P10: concessions actives a D-N01.*
+*Concessions actives a D-N01.*
 
 ### 2.3 DNS
 
@@ -80,19 +80,19 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 
 ![dig a D-N01](img/dns-dhcp/d-n01-fig16-dig-comprovacio.png)
 
-*P11: respostes del DNS des del mateix servidor.*
+*Respostes del DNS des del mateix servidor.*
 
 ![DNS des de la Intranet](img/proves/proves-fig02-dns-intranet.png)
 
-*P12–P14: resolució de R-N01, l'àlies R i el PTR de W-N01 des de PC-Linux.*
+*Resolució de R-N01, l'àlies R i el PTR de W-N01 des de PC-Linux.*
 
 ![nslookup Windows](img/clients/clients-fig11-nslookup-windows.png)
 
-*P15: resolució de noms des del client Windows.*
+*Resolució de noms des del client Windows.*
 
 ![DNS des de la DMZ](img/proves/proves-fig03-dns-dmz.png)
 
-*P16: resolució de noms des de W-N01, a la DMZ.*
+*Resolució de noms des de W-N01, a la DMZ.*
 
 ### 2.4 Router i NAT
 
@@ -105,11 +105,11 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 
 ![tracepath des de PC-Linux](img/proves/proves-fig04-tracepath.png)
 
-*P17: el primer salt cap a Internet és el router.*
+*El primer salt cap a Internet és el router.*
 
 ![Comptador NAT](img/router/fig09-nat-comptador.png)
 
-*P18: comptador de la regla MASQUERADE.*
+*Comptador de la regla MASQUERADE.*
 
 ### 2.5 Tallafocs
 
@@ -127,19 +127,19 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 
 ![Tallafocs F-N01](img/router/fig11-tallafocs-f-n01.png)
 
-*P19–P21: proves des de F-N01.*
+*Proves des de F-N01.*
 
 ![Tallafocs W-N01](img/router/fig12-tallafocs-w-n01.png)
 
-*P22–P23: proves des de W-N01.*
+*Proves des de W-N01.*
 
 ![Tallafocs client](img/router/fig13-tallafocs-client.png)
 
-*P24: prova des de PC-Linux.*
+*Prova des de PC-Linux.*
 
 ![Comptadors](img/router/fig14-tallafocs-comptadors.png)
 
-*P25: comptadors de la cadena FORWARD després de les proves.*
+*Comptadors de la cadena FORWARD després de les proves.*
 
 ### 2.6 Base de dades
 
@@ -153,15 +153,15 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 
 ![Verificació de les dades](img/bbdd/13-verificacio-final.png)
 
-*P26: recompte de registres i mostra de dades a B-N01.*
+*Recompte de registres i mostra de dades a B-N01.*
 
 ![Connexió des de W-N01](img/web/proves-connexio-bd.png)
 
-*P27: consulta des de W-N01 amb l'usuari appweb.*
+*Consulta des de W-N01 amb l'usuari appweb.*
 
 ![Escriptura denegada](img/proves/proves-fig05-appweb-denegat.png)
 
-*P28: l'usuari appweb no pot modificar dades.*
+*L'usuari appweb no pot modificar dades.*
 
 ### 2.7 Web i aplicació
 
@@ -176,15 +176,15 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 
 ![Aplicació pel nom](img/proves/proves-fig06-web-nom.png)
 
-*P29: aplicació carregada amb http://W-N01 des de PC-Linux.*
+*Aplicació carregada amb http://W-N01 des de PC-Linux.*
 
 ![Cerca i filtres](img/proves/proves-fig07-app-cerca-filtres.png)
 
-*P30–P31: cerca i filtre per districte, a la pàgina 2.*
+*Cerca i filtre per districte, a la pàgina 2.*
 
 ![Fitxa de detall](img/proves/proves-fig08-app-fitxa.png)
 
-*P32: fitxa de detall del primer equipament.*
+*Fitxa de detall del primer equipament.*
 
 ### 2.8 FTP
 
@@ -197,7 +197,7 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 
 ![Prova FTP](img/ftp/lftp-comprovacio)
 
-*P33–P34: pujada i baixada per FTP des de PC-Linux.*
+*Pujada i baixada per FTP des de PC-Linux.*
 
 ## 3. Rendiment
 
@@ -234,15 +234,15 @@ La consulta d'un nom extern (P37) és més lenta la primera vegada perquè D-N01
 
 ![Rendiment del web](img/proves/proves-fig09-rendiment-web.png)
 
-*P35: temps de resposta de 5 peticions al web.*
+*Temps de resposta de 5 peticions al web.*
 
 ![Rendiment del DNS](img/proves/proves-fig10-rendiment-dns.png)
 
-*P36–P37: temps de resposta del DNS intern i extern.*
+*Temps de resposta del DNS intern i extern.*
 
 ![Rendiment de MySQL](img/proves/proves-fig11-rendiment-mysql.png)
 
-*P38: temps d'una consulta a MySQL des de W-N01.*
+*Temps d'una consulta a MySQL des de W-N01.*
 
 ## 4. Disponibilitat
 
@@ -276,11 +276,11 @@ systemctl is-active vsftpd;  systemctl is-enabled vsftpd
 
 ![Reinici R-N01](img/proves/proves-fig12-reinici-r-n01.png)
 
-*P39: configuració del router després de reiniciar.*
+*Configuració del router després de reiniciar.*
 
 ![Reinici dels servidors](img/proves/proves-fig13-reinici-serveis.png)
 
-*P40–P43: estat dels serveis després de reiniciar cada servidor.*
+*Estat dels serveis després de reiniciar cada servidor.*
 
 ### Punts únics de fallada
 
