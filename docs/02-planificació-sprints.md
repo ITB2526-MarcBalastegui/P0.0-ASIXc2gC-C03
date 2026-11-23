@@ -102,8 +102,10 @@ El projecte es divideix en tres sprints:
 | | Proves de l'aplicació i accés amb bchecker a MySQL |
 | | Acabar l’aplicació |
 | | Documentar l'aplicació |
+| | Manual d'usuari |
 | | Assaig final conjunt |
-| **Marc** | Documentar el flux Git (`clone`, `add`, `commit`, `push`, `pull`) i la pujada a producció |
+| **Marc** | Manual d'administració |
+| | Documentar el flux Git (`clone`, `add`, `commit`, `push`, `pull`) i la pujada a producció |
 | | Assaig final conjunt |
 
 ---
