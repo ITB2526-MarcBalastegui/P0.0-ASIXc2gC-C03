@@ -1,4 +1,4 @@
-# W-N01 – Servidor web
+   # W-N01 – Servidor web
 
 W-N01 és el servidor web de la infraestructura. És a la DMZ perquè és un servei pensat per ser consultat des de fora, i serveix l'aplicació que mostra les dades de la base de dades de B-N01. Surt a Internet a través de R-N01, de manera que tot el seu trànsit passa pel router.
 
@@ -152,8 +152,8 @@ ping -c 3 10.3.1.10
 
 A més, aquestes comprovacions ja s'han fet havent iniciat sessió com a **bchecker** (el prompt mostra `bchecker@W-N01`). Això demostra que l'usuari funciona i que pot fer servir `sudo`.
 
-![Comprovació de la configuració base](img/web/comprovacions_w-n01)
-![Comprovació de la xarxa](img/web/xarxa_w-n01)
+[Comprovació de la configuració base](img/web/comprovacions_w-n01)
+[Comprovació de la xarxa](img/web/xarxa_w-n01)
 
 *Comprovació final de la configuració base.*
 
