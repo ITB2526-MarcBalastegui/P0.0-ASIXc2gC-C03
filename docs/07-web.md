@@ -90,17 +90,20 @@ echo 'network: {config: disabled}' | sudo tee /etc/cloud/cloud.cfg.d/99-disable-
 network:
   version: 2
   ethernets:
-    itb13:
-      match:
-        macaddress: "52:54:00:57:50:ff"
-      dhcp4: false
-      mtu: 1446
+    enp1s0:                       
       addresses: [10.3.1.20/24]
       routes:
         - to: default
           via: 10.3.1.1
+        - to: 10.3.2.0/24          
+          via: 10.3.1.1
       nameservers:
-        addresses: [8.8.8.8]
+        addresses: [10.3.2.20]
+    enp2s0:                        
+      dhcp4: true
+      dhcp4-overrides:
+        route-metric: 200
+        use-dns: false
 ```
 
 ```bash
