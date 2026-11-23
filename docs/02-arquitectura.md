@@ -102,7 +102,7 @@ El que sí que se separa de l'aplicació és la **base de dades**, perquè té u
  
 **El router no fa cap altre servei (R-N01).** Tot el trànsit hi passa, així que és la peça més crítica de la xarxa. No s'hi instal·la res més perquè tingui els mínims punts vulnerables possibles i perquè un error en un altre servei no deixi tota la infraestructura sense xarxa.
  
-## Tallafocs previst (Sprint 3)
+## Tallafocs
  
 | Origen | Destí | Permès | Motiu |
 |---|---|---|---|
