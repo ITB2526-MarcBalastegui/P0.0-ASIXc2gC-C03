@@ -92,7 +92,7 @@ El projecte es divideix en tres sprints:
 
 ---
 
-## 5. Sprint 3 – Aplicació, seguretat i tancament
+## 5. Sprint 3 – Revisió i Tancament
 
 | Persona | Tasca |
 |---|---|
