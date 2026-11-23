@@ -17,13 +17,13 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 
 **Què es prova.** Que l'usuari `bchecker` existeix a tots els equips i hi pot entrar, tal com exigeix l'enunciat.
 
-| ID | Prova | Des d'on | Ordre | Esperat | Obtingut |
+| ID | Prova | Des d'on | Ordre | Esperat |
 |---|---|---|---|---|---|
-| P01 | SSH a R-N01 | PC-Linux | `ssh bchecker@10.3.2.1 hostname` | `R-N01` | *pendent* |
-| P02 | SSH a D-N01 | PC-Linux | `ssh bchecker@10.3.2.20 hostname` | `D-N01` | *pendent* |
-| P03 | SSH a B-N01 | PC-Linux | `ssh bchecker@10.3.2.10 hostname` | `B-N01` | *pendent* |
-| P04 | SSH a W-N01 | PC-Linux | `ssh bchecker@10.3.1.20 hostname` | `W-N01` | *pendent* |
-| P05 | SSH a F-N01 | PC-Linux | `ssh bchecker@10.3.1.10 hostname` | `F-N01` | *pendent* |
+| P01 | SSH a R-N01 | PC-Linux | `ssh bchecker@10.3.2.1` | `R-N01` |
+| P02 | SSH a D-N01 | PC-Linux | `ssh bchecker@10.3.2.20` | `D-N01` |
+| P03 | SSH a B-N01 | PC-Linux | `ssh bchecker@10.3.2.10 ` | `B-N01` |
+| P04 | SSH a W-N01 | PC-Linux | `ssh bchecker@10.3.1.20` | `W-N01` |
+| P05 | SSH a F-N01 | PC-Linux | `ssh bchecker@10.3.1.10` | `F-N01` |
 | P06 | Usuari bchecker al client Windows | PC-Windows | `net user bchecker` i iniciar sessió com a `bchecker` | Usuari al grup `Administradores` i sessió iniciada | Usuari creat i afegit a `Administradores`. La consola mostra `C:\Users\bchecker>` |
 | P07 | Usuari bchecker a MySQL | B-N01 | `mysql -u bchecker -p -e "SHOW DATABASES;"` | Apareix `equipaments` | Apareix `equipaments` |
 
