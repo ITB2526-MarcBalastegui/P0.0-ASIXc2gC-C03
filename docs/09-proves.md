@@ -72,15 +72,27 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 | ID | Prova | Des d'on | Ordre | Esperat | Obtingut |
 |---|---|---|---|---|---|
 | P11 | Registres al mateix servidor | D-N01 | `dig @10.3.2.20 D-N01.g03.intra +short`<br>`dig @10.3.2.20 R.g03.intra +short`<br>`dig @10.3.2.20 -x 10.3.2.10 +short`<br>`dig @10.3.2.20 www.google.com +short` | `10.3.2.20`, àlies a `10.3.2.1`, `B-N01.g03.intra.` i IPs públiques | `10.3.2.20`; `R-N01.g03.intra.` i `10.3.2.1`; `B-N01.g03.intra.`; diverses IPs 142.251.x.x |
-| P12 | Nom del router | PC-Linux | `dig R-N01.g03.intra +short` | `10.3.2.1` | *pendent* |
-| P13 | Àlies del router | PC-Linux | `dig R.g03.intra +short` | `R-N01.g03.intra.` i `10.3.2.1` | *pendent* |
-| P14 | Resolució inversa d'una màquina de la DMZ | PC-Linux | `dig -x 10.3.1.20 +short` | `W-N01.g03.intra.` | *pendent* |
+| P12 | Nom del router | PC-Linux | `dig R-N01.g03.intra +short` | `10.3.2.1` | `10.3.2.` |
+| P13 | Àlies del router | PC-Linux | `dig R.g03.intra +short` | `R-N01.g03.intra.` i `10.3.2.1` | `R-N01.g03.intra.` i `10.3.2.1` |
+| P14 | Resolució inversa d'una màquina de la DMZ | PC-Linux | `dig -x 10.3.1.20 +short` | `W-N01.g03.intra.` | `W-N01.g03.intra.` |
 | P15 | Nom intern i extern des del Windows | PC-Windows | `nslookup B-N01.g03.intra`<br>`nslookup www.google.com` | `10.3.2.10` i IPs públiques, servidor `10.3.2.20` | *per confirmar a la captura* |
 | P16 | DNS des de la DMZ | W-N01 | `dig B-N01.g03.intra +short` | `10.3.2.10` (el tallafocs permet el port 53 de la DMZ cap a D-N01) | *pendent* |
 
 ![dig a D-N01](img/dns-dhcp/d-n01-fig16-dig-comprovacio.png)
 
 *Respostes del DNS des del mateix servidor.*
+
+![DNS des de la Intranet](img/proves/proves-fig02-dns-intranet.png)
+
+*resolució de R-N01*
+
+![DNS des de la Intranet](img/proves/alies-R.png)
+
+*Àlies del router*
+
+![DNS des de la Intranet](img/proves/resolució-inversa-DMZ.png)
+
+*Resolució inversa d'una màquina de la DMZ*
 
 ![DNS des de la Intranet](img/proves/proves-fig02-dns-intranet.png)
 
