@@ -194,7 +194,7 @@ curl localhost/prova.php
 - `php -m | grep -i mysql` ha de mostrar els mòduls `mysqli`, `mysqlnd` i `pdo_mysql`.
 - `curl localhost/prova.php` ha de retornar `PHP funciona a W-N01`. Si retornés el codi PHP tal qual, voldria dir que Apache no passa els fitxers `.php` a PHP.
 
-![Comprovació d'Apache i PHP](img/web/apache_w-n01)
+![Comprovació d'Apache i PHP](img/web/apache_w-n01.png)
 
 *Estat d'Apache, versió de PHP, mòduls de MySQL i pàgina de prova.*
 
@@ -206,7 +206,7 @@ curl http://10.3.1.20/prova.php
 
 Retorna `PHP funciona a W-N01`, cosa que demostra que les IPs fixes de la DMZ funcionen i que el servidor web serveix pàgines a altres equips.
 
-![Accés a la web des de F-N01](img/web/acces-desde-f_n01)
+![Accés a la web des de F-N01](img/web/acces-desde-f_n01.png)
 
 *Petició a la pàgina de prova de W-N01 des de F-N01.*
 
@@ -243,7 +243,7 @@ mysql -h 10.3.2.10 -u appweb -p equipaments -e "SELECT COUNT(*) FROM equipaments
 | Port 3306 de B-N01 | `succeeded` (el tallafocs de B-N01 deixa passar W-N01) |
 | Consulta amb `appweb` | `2710` registres |
 
-![Fig10](img/web/proves-connexio-bd)
+![Fig10](img/web/proves-connexio-bd.png)
 
 *Comprovació de la connexió de W-N01 cap a la base de dades de B-N01.*
 
@@ -261,7 +261,7 @@ Aquesta versió inicial va permetre detectar diversos problemes que es van resol
 | Cada equipament apareixia repetit en diverses files | Resultats duplicats | S'agrupa per equipament (`register_id`) |
 | La columna `timetable` mostrava marcatge HTML | Text il·legible a la pàgina | Es converteix a text net abans de mostrar-lo |
 
-![Fig11](img/web/01-web-primera-versio)
+![Fig11](img/web/01-web-primera-versio.png)
 
 *Primera versió: taula completa sense filtres ni paginació.*
 
@@ -337,7 +337,7 @@ El codi complet és al repositori, a `web/index.php`.
 sudo cp index.php /var/www/html/index.php
 ```
 
-![Fig12](img/web/desplegament-fitxers)
+![Fig12](img/web/desplegament-fitxers.png)
 
 *Fitxers de l'aplicació i de la configuració a W-N01.*
 
@@ -381,7 +381,7 @@ curl -s http://localhost | grep -o "Equipaments d'educació" | head -n 1
 
 Si el navegador continua mostrant la pàgina antiga, es força la recàrrega amb `Ctrl+F5`, ja que pot tenir-la a la memòria cau.
 
-![Fig13](img/web/apache-directoryindex)
+![Fig13](img/web/apache-directoryindex.png)
 
 *Configuració de DirectoryIndex i comprovació amb `apache2ctl configtest` i `curl`.*
 
