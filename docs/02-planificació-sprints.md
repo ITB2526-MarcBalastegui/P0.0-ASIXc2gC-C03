@@ -100,7 +100,7 @@ El projecte es divideix en tres sprints:
 | | Assaig final conjunt |
 | **Adam** | Pujar l'aplicació al repositori i desplegar-la a W-N01 amb `git pull` |
 | | Proves de l'aplicació i accés amb bchecker a MySQL |
-| | Acabar l’aplicació |
+| | Acabar l’aplicació, taula HTML, paginació i un cercador |
 | | Documentar l'aplicació |
 | | Manual d'usuari |
 | | Assaig final conjunt |
