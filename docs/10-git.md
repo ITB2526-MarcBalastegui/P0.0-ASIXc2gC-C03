@@ -32,7 +32,7 @@ cat ~/.ssh/id_ed25519.pub
 
 El contingut d'aquest fitxer és el que s'enganxa a GitHub, al repositori: **Settings → Deploy keys → Add deploy key**, deixant *Allow write access* sense marcar.
 
-![Generació de la clau i clau pública](img/git/keygen.png)
+![Generació de la clau i clau pública](img/git/keygen)
 
 ## 2. Comprovació de l'accés a GitHub
 
@@ -50,7 +50,7 @@ Hi ITB2526-MarcBalastegui/P0.0-ASIXc2gC-C03! You've successfully authenticated, 
 
 Que surti el nom del **repositori** (i no el de l'usuari) confirma que l'autenticació s'ha fet amb la deploy key d'aquest projecte.
 
-![Accés correcte a GitHub amb la deploy key](img/git/ssh.png)
+![Accés correcte a GitHub amb la deploy key](img/git/ssh)
 
 ## 3. Accés al repositori
 
@@ -62,4 +62,4 @@ git clone git@github.com:ITB2526-MarcBalastegui/P0.0-ASIXc2gC-C03.git /var/www/p
 
 El fet que el `clone` funcioni sense demanar cap contrasenya és la prova definitiva que el servidor es valida per clau pública/privada.
 
-![Clonat del repositori amb la deploy key](img/git/clone.png)
+![Clonat del repositori amb la deploy key](img/git/clone)
