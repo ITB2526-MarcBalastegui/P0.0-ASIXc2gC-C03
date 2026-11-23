@@ -167,7 +167,7 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 
 *Recompte de registres i mostra de dades a B-N01.*
 
-![Connexió des de W-N01](img/web/proves-connexio-bd.png)
+![Connexió des de W-N01](img/proves/W-N01-bd.png)
 
 *Consulta des de W-N01 amb l'usuari appweb.*
 
