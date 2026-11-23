@@ -76,7 +76,7 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 | P13 | Àlies del router | PC-Linux | `dig R.g03.intra +short` | `R-N01.g03.intra.` i `10.3.2.1` | `R-N01.g03.intra.` i `10.3.2.1` |
 | P14 | Resolució inversa d'una màquina de la DMZ | PC-Linux | `dig -x 10.3.1.20 +short` | `W-N01.g03.intra.` | `W-N01.g03.intra.` |
 | P15 | Nom intern i extern des del Windows | PC-Windows | `nslookup B-N01.g03.intra`<br>`nslookup www.google.com` | `10.3.2.10` i IPs públiques, servidor `10.3.2.20` | *per confirmar a la captura* |
-| P16 | DNS des de la DMZ | W-N01 | `dig B-N01.g03.intra +short` | `10.3.2.10` (el tallafocs permet el port 53 de la DMZ cap a D-N01) | *pendent* |
+| P16 | DNS des de la DMZ | W-N01 | `dig B-N01.g03.intra +short` | `10.3.2.10` (el tallafocs permet el port 53 de la DMZ cap a D-N01) | `10.3.2.10` |
 
 ![dig a D-N01](img/dns-dhcp/d-n01-fig16-dig-comprovacio.png)
 
