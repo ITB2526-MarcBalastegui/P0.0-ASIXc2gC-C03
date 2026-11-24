@@ -82,21 +82,17 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 
 *Respostes del DNS des del mateix servidor.*
 
-![DNS des de la Intranet](img/proves/proves-fig02-dns-intranet.png)
+![Resolució de R-N01](img/proves/proves-fig02-dns-intranet.png)
 
 *resolució de R-N01 des de PC-Linux.*
 
-![DNS des de la Intranet](img/proves/alies-R.png)
+![Àlies del router](img/proves/alies-R.png)
 
 *Resolució de l'àlies R des de PC-Linux.*
 
-![DNS des de la Intranet](img/proves/resolució-inversa-DMZ.png)
+![Resolució inversa](img/proves/resolució-inversa-DMZ.png)
 
 *Resolució inversa d'una màquina de la DMZ*
-
-![DNS des de la Intranet](img/proves/proves-fig02-dns-intranet.png)
-
-*Resolució de R-N01, l'àlies R i el PTR de W-N01 des de PC-Linux.*
 
 ![nslookup Windows](img/clients/clients-fig11-nslookup-windows.png)
 
@@ -181,8 +177,8 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 
 | ID | Prova | Des d'on | Acció | Esperat | Obtingut |
 |---|---|---|---|---|---|
-| P29 | Accés pel nom | PC-Linux (navegador) | Obrir `http://W-N01` | Es mostra l'aplicació, no la pàgina d'Apache | Mostra la pàgina principal de l'applicació |
-| P30 | Cercador | PC-Linux (navegador) | Cercar `escola` | El llistat i el comptador de resultats canvien | Els resultats s'adedqüen a la cerca |
+| P29 | Accés pel nom | PC-Linux (navegador) | Obrir `http://W-N01` | Es mostra l'aplicació, no la pàgina d'Apache | Mostra la pàgina principal de l'aplicació |
+| P30 | Cercador | PC-Linux (navegador) | Cercar `escola` | El llistat i el comptador de resultats canvien | El llistat només mostra els equipaments que coincideixen amb la cerca |
 | P31 | Filtres i paginació | PC-Linux (navegador) | Filtrar per un districte i passar a la pàgina 2 | El filtre es manté en canviar de pàgina | El filtre es manté en canviar de pàgina |
 | P32 | Fitxa de detall | PC-Linux (navegador) | Obrir el primer equipament del llistat | Es mostra la fitxa, amb accents correctes | És mostra la fitxa amb accents correctes |
 
@@ -243,7 +239,7 @@ time mysql -h 10.3.2.10 -u appweb -pappweb121 equipaments -e "SELECT COUNT(*) FR
 |---|---|---|---|---|
 | P35 | Temps de resposta del web (mitjana de 5) | < 1 s | ~0.04 s| Sí |
 | P36 | DNS intern | < 50 ms | 4 ms | Sí |
-| P37 | DNS extern (primera consulta, sense memòria cau) | Informatiu | 	22 ms la primera vegada | — |
+| P37 | DNS extern (primera consulta, sense memòria cau) | Informatiu | 22 ms la primera vegada | — |
 | P38 | Consulta a MySQL des de W-N01 | < 1 s | ~0.05 s | Sí |
 
 La consulta d'un nom extern (P37) és més lenta la primera vegada perquè D-N01 l'ha de demanar a 8.8.8.8. Les següents vegades la respon de la memòria cau. Es mesura només com a informació, perquè depèn de la connexió d'Isard.
