@@ -112,7 +112,7 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 
 | ID | Prova | Des d'on | Ordre | Esperat | Obtingut |
 |---|---|---|---|---|---|
-| P17 | Sortida a Internet pel router | PC-Linux | `tracepath -n 8.8.8.8 \| head -n 5` | El primer salt és `10.3.2.1` | *pendent* |
+| P17 | Sortida a Internet pel router | PC-Linux | `ip route get 8.8.8.8 tracepath -n -m 3 8.8.8.8` | La ruta va via `10.3.2.1` i el primer salt és `10.3.2.1` | `8.8.8.8 via 10.3.2.1 dev enp1s0 src 10.3.2.104`. Salts: 1 `10.3.2.1` (R-N01), 2 `192.168.120.1` (NAT d'Isard), 3 `172.31.255.1` |
 | P18 | NAT | W-N01 i R-N01 | `ping -c 3 8.8.8.8` i, al router, `sudo iptables -t nat -L POSTROUTING -n -v` | El comptador de `MASQUERADE` puja | 6 paquets, un per cada ping fet des de W-N01 |
 
 ![tracepath des de PC-Linux](img/proves/proves-fig04-tracepath.png)
