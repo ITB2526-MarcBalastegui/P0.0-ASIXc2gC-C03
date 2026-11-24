@@ -18,7 +18,7 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 **Què es prova.** Que l'usuari `bchecker` existeix a tots els equips i hi pot entrar, tal com exigeix l'enunciat.
 
 | ID | Prova | Des d'on | Ordre | Esperat |
-|---|---|---|---|---|---|
+|---|---|---|---|---|
 | P01 | SSH a R-N01 | PC-Linux | `ssh bchecker@10.3.2.1` | `R-N01` |
 | P02 | SSH a D-N01 | PC-Linux | `ssh bchecker@10.3.2.20` | `D-N01` |
 | P03 | SSH a B-N01 | PC-Linux | `ssh bchecker@10.3.2.10 ` | `B-N01` |
