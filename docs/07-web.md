@@ -109,21 +109,29 @@ sudo chmod 600 /etc/netplan/*.yaml
 sudo netplan try
 ```
 
-- **`enp1s0` (DMZ):** IP fixa `10.3.1.20/24`. Té dues rutes, totes dues via el router (10.3.1.1): la `default` (tota la sortida a Internet passa per R-N01) i una d'explícita cap a la Intranet (`10.3.2.0/24`), perquè el trànsit cap a B-N01 i D-N01 surti sempre per la DMZ i mai per la VPN.
-- **DNS `10.3.2.20`:** el servidor DNS del projecte (D-N01). És el que resol els noms interns (W-N01, B-N01, etc.).
-- **`enp2s0` (VPN):** rep la IP per DHCP de la xarxa VPN. Les dues opcions són les que eviten que la VPN trenqui l'enrutament:
-  - **`route-metric: 200`** dona a les rutes de la VPN una prioritat baixa (mètrica alta), de manera que la ruta per defecte continua sent la de `enp1s0` (via R-N01) i no la de la VPN.
-  - **`use-dns: false`** impedeix que la VPN imposi els seus propis servidors DNS i substitueixi el de D-N01.
-
-```bash
-sudo netplan try
-```
-
+- **Ruta per defecte via 10.3.1.1:** tot el trànsit cap a Internet passa per R-N01, i per tant pel NAT i el tallafocs.
+- **Ruta `10.3.2.0/24` via 10.3.1.1:** la VPN d'Isard afegeix la ruta `10.0.0.0/14`, que inclou les adreces de la Intranet (10.3.2.x). Com que és més específica que la ruta per defecte, sense aquesta línia les respostes cap a la Intranet sortirien per la VPN i es perdrien. Una ruta `/24` és més específica que la `/14`, i té preferència (vegeu la incidència de més avall).
+- **`route-metric: 200` i `use-dns: false` a la VPN:** la ruta per defecte que pugui donar la VPN té menys prioritat que la del router, i el DNS de la VPN no substitueix D-N01.
 - **`netplan try`:** aplica la configuració i la desfà sola si no es confirma en 120 segons. Si un error deixa la màquina sense xarxa, es recupera sense haver de fer res.
 
-**Incidència 1: pèrdua d'Internet en separar les interfícies.** En el primer muntatge (Sprint 1), en lloc de crear un fitxer nou per a la DMZ, es va substituir el contingut del fitxer original, que configurava la Default. En aplicar-lo, la Default es va quedar sense IP i la màquina sense sortida a Internet (`curl` donava *Could not resolve host* i `ip route` no tenia cap ruta `default`). Es va resoldre separant cada interfície al seu fitxer: netplan només configura les interfícies que té definides, i si se n'esborra una, en reaplicar-se es queda sense configuració.
+**Procés.** Mentre R-N01 no funcionava, la màquina tenia un segon fitxer (`50-cloud-init.yaml`) que donava IP per DHCP a la interfície Default, per poder instal·lar paquets. Quan el router va estar operatiu, es va afegir el gateway 10.3.1.1 a la ITB13 i es va eliminar aquest fitxer.
 
-**Incidència 2: la VPN es va quedar la ruta per defecte.** En afegir la interfície de la VPN, aquesta va rebre per DHCP una ruta per defecte amb més prioritat que la de la DMZ. El resultat va ser que W-N01 contestava a la Intranet per la VPN en comptes de pel router, i els clients no arribaven al servidor web. Es va resoldre amb el `route-metric: 200` i la ruta explícita cap a `10.3.2.0/24`, perquè la sortida i les respostes tornin a passar sempre per R-N01.
+**Incidència.** En el primer intent, en lloc de crear un fitxer nou per a la ITB13, es va substituir el contingut del fitxer original, que configurava la Default. En aplicar-lo, la Default es va quedar sense IP i la màquina sense sortida a Internet:
+
+- `curl -I http://archive.ubuntu.com` → *Could not resolve host*
+- `curl -I http://91.189.91.81` → *Couldn't connect to server*. No era només el DNS: no hi havia cap sortida.
+- `ip route` → només hi havia la ruta de la DMZ, cap ruta `default`.
+
+Es va solucionar separant la configuració en un fitxer per interfície. La causa és que netplan només configura les interfícies que té definides: si se n'esborra una dels fitxers, en reaplicar-los es queda sense configuració.
+
+**Incidència: les respostes a la Intranet sortien per la VPN.** Durant les proves finals, B-N01 no podia fer ping a W-N01. Amb `tcpdump` al router es veia que el ping arribava a W-N01, però no tornava cap resposta. Amb `tcpdump` a W-N01 es va veure on anava:
+
+```
+enp1s0 In   10.3.2.10 > 10.3.1.20: ICMP echo request
+enp2s0 Out  10.3.1.20 > 10.3.2.10: ICMP echo reply
+```
+
+La petició entrava per la DMZ (`enp1s0`), però la resposta sortia per la VPN (`enp2s0`). `ip route` en mostrava la causa: la ruta `10.0.0.0/14 via 10.2.0.1 dev enp2s0`, que afegeix la VPN, inclou la 10.3.2.10 i és més específica que la ruta per defecte. Es va solucionar afegint al netplan la ruta `10.3.2.0/24 via 10.3.1.1`, que té preferència perquè és encara més específica.
 
 ### 2.5 Comprovació
 
