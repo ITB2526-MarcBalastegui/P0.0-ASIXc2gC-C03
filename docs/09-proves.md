@@ -21,7 +21,7 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 |---|---|---|---|---|
 | P01 | SSH a R-N01 | PC-Linux | `ssh bchecker@10.3.2.1` | `R-N01` |
 | P02 | SSH a D-N01 | PC-Linux | `ssh bchecker@10.3.2.20` | `D-N01` |
-| P03 | SSH a B-N01 | PC-Linux | `ssh bchecker@10.3.2.10 ` | `B-N01` |
+| P03 | SSH a B-N01 | PC-Linux | `ssh bchecker@10.3.2.10` | `B-N01` |
 | P04 | SSH a W-N01 | PC-Linux | `ssh bchecker@10.3.1.20` | `W-N01` |
 | P05 | SSH a F-N01 | PC-Linux | `ssh bchecker@10.3.1.10` | `F-N01` |
 | P06 | Usuari bchecker al client Windows | PC-Windows | `net user bchecker` i iniciar sessió com a `bchecker` | Usuari al grup `Administradores` i sessió iniciada | Usuari creat i afegit a `Administradores`. La consola mostra `C:\Users\bchecker>` |
@@ -50,7 +50,7 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 | ID | Prova | Des d'on | Ordre | Esperat | Obtingut |
 |---|---|---|---|---|---|
 | P08 | Configuració rebuda al Windows | PC-Windows | `ipconfig /all` | IP del rang 10.3.2.100–200, gateway 10.3.2.1, DNS 10.3.2.20, sufix `g03.intra` | 10.3.2.103, 10.3.2.1, 10.3.2.20, `g03.intra` |
-| P09 | Configuració rebuda al Linux | PC-Linux | `ip -br a`, `ip route`, `resolvectl status` | P del rang 10.3.2.100–200, gateway 10.3.2.1, DNS 10.3.2.20, sufix g03.intra | 10.3.2.104, 10.3.2.1, 10.3.2.20, `g03.intra` |
+| P09 | Configuració rebuda al Linux | PC-Linux | `ip -br a`, `ip route`, `resolvectl status` | IP del rang 10.3.2.100–200, gateway 10.3.2.1, DNS 10.3.2.20, sufix g03.intra | 10.3.2.104, 10.3.2.1, 10.3.2.20, `g03.intra` |
 | P10 | Concessions al servidor | D-N01 | `dhcp-lease-list` | `52:54:00:5b:e1:ed` (Windows) → 10.3.2.103 i `52:54:00:4f:de:0f` (Linux) → 10.3.2.104 | `52:54:00:5b:e1:ed` → 10.3.2.103 (`PC-Windows`) i `52:54:00:4f:de:0f` → 10.3.2.104 (`PC-Linux`) |
 
 ![ipconfig Windows](img/clients/clients-fig02-ipconfig-windows.png)
@@ -72,7 +72,7 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 | ID | Prova | Des d'on | Ordre | Esperat | Obtingut |
 |---|---|---|---|---|---|
 | P11 | Registres al mateix servidor | D-N01 | `dig @10.3.2.20 D-N01.g03.intra +short`<br>`dig @10.3.2.20 R.g03.intra +short`<br>`dig @10.3.2.20 -x 10.3.2.10 +short`<br>`dig @10.3.2.20 www.google.com +short` | `10.3.2.20`, àlies a `10.3.2.1`, `B-N01.g03.intra.` i IPs públiques | `10.3.2.20`; `R-N01.g03.intra.` i `10.3.2.1`; `B-N01.g03.intra.`; diverses IPs 142.251.x.x |
-| P12 | Nom del router | PC-Linux | `dig R-N01.g03.intra +short` | `10.3.2.1` | `10.3.2.` |
+| P12 | Nom del router | PC-Linux | `dig R-N01.g03.intra +short` | `10.3.2.1` | `10.3.2.1` |
 | P13 | Àlies del router | PC-Linux | `dig R.g03.intra +short` | `R-N01.g03.intra.` i `10.3.2.1` | `R-N01.g03.intra.` i `10.3.2.1` |
 | P14 | Resolució inversa d'una màquina de la DMZ | PC-Linux | `dig -x 10.3.1.20 +short` | `W-N01.g03.intra.` | `W-N01.g03.intra.` |
 | P15 | Nom intern i extern des del Windows | PC-Windows | `nslookup B-N01.g03.intra`<br>`nslookup www.google.com` | `10.3.2.10` i IPs públiques, servidor `10.3.2.20` | `10.3.2.10` i IPs públiques, servidor `10.3.2.20` |
@@ -84,11 +84,11 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 
 ![DNS des de la Intranet](img/proves/proves-fig02-dns-intranet.png)
 
-*resolució de R-N01*
+*resolució de R-N01 des de PC-Linux.*
 
 ![DNS des de la Intranet](img/proves/alies-R.png)
 
-*Àlies del router*
+*Resolució de l'àlies R des de PC-Linux.*
 
 ![DNS des de la Intranet](img/proves/resolució-inversa-DMZ.png)
 
@@ -112,7 +112,7 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 
 | ID | Prova | Des d'on | Ordre | Esperat | Obtingut |
 |---|---|---|---|---|---|
-| P17 | Sortida a Internet pel router | PC-Linux | `ip route get 8.8.8.8 tracepath -n -m 3 8.8.8.8` | La ruta va via `10.3.2.1` i el primer salt és `10.3.2.1` | `8.8.8.8 via 10.3.2.1 dev enp1s0 src 10.3.2.104`. Salts: 1 `10.3.2.1` (R-N01), 2 `192.168.120.1` (NAT d'Isard), 3 `172.31.255.1` |
+| P17 | Sortida a Internet pel router | PC-Linux | `ip route get 8.8.8.8  tracepath -n -m 3 8.8.8.8` | La ruta va via `10.3.2.1` i el primer salt és `10.3.2.1` | `8.8.8.8 via 10.3.2.1 dev enp1s0 src 10.3.2.104`. Salts: 1 `10.3.2.1` (R-N01), 2 `192.168.120.1` (NAT d'Isard), 3 `172.31.255.1` |
 | P18 | NAT | W-N01 i R-N01 | `ping -c 3 8.8.8.8` i, al router, `sudo iptables -t nat -L POSTROUTING -n -v` | El comptador de `MASQUERADE` puja | 6 paquets, un per cada ping fet des de W-N01 |
 
 ![tracepath des de PC-Linux](img/proves/proves-fig04-tracepath.png)
