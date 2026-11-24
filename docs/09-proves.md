@@ -190,6 +190,10 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 
 *Aplicació carregada amb http://W-N01 des de PC-Linux.*
 
+![Cercador](img/proves/proves-cercador.png)
+
+*Cercar escola*
+
 ![Cerca i filtres](img/proves/proves-fig07-app-cerca-filtres.png)
 
 *Cerca i filtre per districte, a la pàgina 2.*
