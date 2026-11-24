@@ -319,16 +319,18 @@ La concessió del DHCP dura 10 minuts (`default-lease-time 600`). Per tant, si D
 
 ## 5. Resum
 
-| Bloc | Proves | Correctes | Pendents |
+S'han fet les 43 proves i totes donen el resultat esperat. Els tres criteris de rendiment es compleixen amb molt de marge, i tots els serveis i la configuració del router tornen sols després d'un reinici.
+
+| Bloc | Proves | Correctes | Incorrectes |
 |---|---|---|---|
-| Accés amb bchecker | P01–P07 | 2 | 5 |
-| DHCP | P08–P10 | 2 | 1 |
-| DNS | P11–P16 | 1 | 5 |
-| Router i NAT | P17–P18 | 1 | 1 |
+| Accés amb bchecker | P01–P07 | 7 | 0 |
+| DHCP | P08–P10 | 3 | 0 |
+| DNS | P11–P16 | 6 | 0 |
+| Router i NAT | P17–P18 | 2 | 0 |
 | Tallafocs | P19–P25 | 7 | 0 |
-| Base de dades | P26–P28 | 1 | 2 |
-| Web i aplicació | P29–P32 | 0 | 4 |
+| Base de dades | P26–P28 | 3 | 0 |
+| Web i aplicació | P29–P32 | 4 | 0 |
 | FTP | P33–P34 | 2 | 0 |
-| Rendiment | P35–P38 | 0 | 4 |
-| Disponibilitat | P39–P43 | 0 | 5 |
-| **Total** | **43** | **16** | **27** |
+| Rendiment | P35–P38 | 4 | 0 |
+| Disponibilitat | P39–P43 | 5 | 0 |
+| **Total** | **43** | **43** | **0** |
