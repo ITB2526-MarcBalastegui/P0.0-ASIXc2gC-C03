@@ -75,7 +75,7 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 | P12 | Nom del router | PC-Linux | `dig R-N01.g03.intra +short` | `10.3.2.1` | `10.3.2.` |
 | P13 | Àlies del router | PC-Linux | `dig R.g03.intra +short` | `R-N01.g03.intra.` i `10.3.2.1` | `R-N01.g03.intra.` i `10.3.2.1` |
 | P14 | Resolució inversa d'una màquina de la DMZ | PC-Linux | `dig -x 10.3.1.20 +short` | `W-N01.g03.intra.` | `W-N01.g03.intra.` |
-| P15 | Nom intern i extern des del Windows | PC-Windows | `nslookup B-N01.g03.intra`<br>`nslookup www.google.com` | `10.3.2.10` i IPs públiques, servidor `10.3.2.20` | *per confirmar a la captura* |
+| P15 | Nom intern i extern des del Windows | PC-Windows | `nslookup B-N01.g03.intra`<br>`nslookup www.google.com` | `10.3.2.10` i IPs públiques, servidor `10.3.2.20` | `10.3.2.10` i IPs públiques, servidor `10.3.2.20` |
 | P16 | DNS des de la DMZ | W-N01 | `dig B-N01.g03.intra +short` | `10.3.2.10` (el tallafocs permet el port 53 de la DMZ cap a D-N01) | `10.3.2.10` |
 
 ![dig a D-N01](img/dns-dhcp/d-n01-fig16-dig-comprovacio.png)
@@ -160,8 +160,8 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 | ID | Prova | Des d'on | Ordre | Esperat | Obtingut |
 |---|---|---|---|---|---|
 | P26 | Registres carregats | B-N01 | `SELECT COUNT(*) FROM equipaments_educacio;` | `2710`, amb accents i codis postals correctes | `2710`; codis postals `08024`, `08030`, `08038`; `Institut Escola El Til·ler` correcte |
-| P27 | Accés de l'aplicació | W-N01 | `mysql -h 10.3.2.10 -u appweb -p equipaments -e "SELECT COUNT(*) FROM equipaments_educacio;"` | `2710` | *per confirmar a la captura* |
-| P28 | L'usuari de l'aplicació no pot escriure | W-N01 | `mysql -h 10.3.2.10 -u appweb -p equipaments -e "DELETE FROM equipaments_educacio LIMIT 1;"` | `ERROR 1142`: ordre DELETE denegada | *pendent* |
+| P27 | Accés de l'aplicació | W-N01 | `mysql -h 10.3.2.10 -u appweb -p equipaments -e "SELECT COUNT(*) FROM equipaments_educacio;"` | `2710` | `2710` |
+| P28 | L'usuari de l'aplicació no pot escriure | W-N01 | `mysql -h 10.3.2.10 -u appweb -p equipaments -e "DELETE FROM equipaments_educacio LIMIT 1;"` | `ERROR 1142`: ordre DELETE denegada | `ERROR 1142`: ordre DELETE denegada |
 
 ![Verificació de les dades](img/bbdd/13-verificacio-final.png)
 
@@ -181,10 +181,10 @@ Algunes proves es van fer en configurar cada servei. Aquí se'n recull igualment
 
 | ID | Prova | Des d'on | Acció | Esperat | Obtingut |
 |---|---|---|---|---|---|
-| P29 | Accés pel nom | PC-Linux (navegador) | Obrir `http://W-N01` | Es mostra l'aplicació, no la pàgina d'Apache | *pendent* |
-| P30 | Cercador | PC-Linux (navegador) | Cercar `escola` | El llistat i el comptador de resultats canvien | *pendent* |
-| P31 | Filtres i paginació | PC-Linux (navegador) | Filtrar per un districte i passar a la pàgina 2 | El filtre es manté en canviar de pàgina | *pendent* |
-| P32 | Fitxa de detall | PC-Linux (navegador) | Obrir el primer equipament del llistat | Es mostra la fitxa, amb accents correctes | *pendent* |
+| P29 | Accés pel nom | PC-Linux (navegador) | Obrir `http://W-N01` | Es mostra l'aplicació, no la pàgina d'Apache | Mostra la pàgina principal de l'applicació |
+| P30 | Cercador | PC-Linux (navegador) | Cercar `escola` | El llistat i el comptador de resultats canvien | Els resultats s'adedqüen a la cerca |
+| P31 | Filtres i paginació | PC-Linux (navegador) | Filtrar per un districte i passar a la pàgina 2 | El filtre es manté en canviar de pàgina | El filtre es manté en canviar de pàgina |
+| P32 | Fitxa de detall | PC-Linux (navegador) | Obrir el primer equipament del llistat | Es mostra la fitxa, amb accents correctes | És mostra la fitxa amb accents correctes |
 
 ![Aplicació pel nom](img/proves/proves-fig06-web-nom.png)
 
@@ -241,10 +241,10 @@ time mysql -h 10.3.2.10 -u appweb -pappweb121 equipaments -e "SELECT COUNT(*) FR
 
 | ID | Prova | Límit | Obtingut | Compleix |
 |---|---|---|---|---|
-| P35 | Temps de resposta del web (mitjana de 5) | < 1 s | *pendent* | *pendent* |
-| P36 | DNS intern | < 50 ms | *pendent* | *pendent* |
-| P37 | DNS extern (primera consulta, sense memòria cau) | Informatiu | *pendent* | — |
-| P38 | Consulta a MySQL des de W-N01 | < 1 s | *pendent* | *pendent* |
+| P35 | Temps de resposta del web (mitjana de 5) | < 1 s | ~0.04 s| Sí |
+| P36 | DNS intern | < 50 ms | 4 ms | Sí |
+| P37 | DNS extern (primera consulta, sense memòria cau) | Informatiu | 	22 ms la primera vegada | — |
+| P38 | Consulta a MySQL des de W-N01 | < 1 s | ~0.05 s | Sí |
 
 La consulta d'un nom extern (P37) és més lenta la primera vegada perquè D-N01 l'ha de demanar a 8.8.8.8. Les següents vegades la respon de la memòria cau. Es mesura només com a informació, perquè depèn de la connexió d'Isard.
 
@@ -284,11 +284,11 @@ systemctl is-active vsftpd;  systemctl is-enabled vsftpd
 
 | ID | Prova | Màquina | Esperat | Obtingut |
 |---|---|---|---|---|
-| P39 | Reenviament i regles persistents | R-N01 | `ip_forward = 1`, les 5 regles de `FORWARD` i la de `MASQUERADE` | *pendent* |
-| P40 | DHCP i DNS arrenquen sols | D-N01 | `active` i `enabled` | *pendent* |
-| P41 | MySQL arrenca sol | B-N01 | `active` i `enabled` | *pendent* |
-| P42 | Apache arrenca sol | W-N01 | `active` i `enabled` | *pendent* |
-| P43 | vsftpd arrenca sol | F-N01 | `active` i `enabled` | *pendent* |
+| P39 | Reenviament i regles persistents | R-N01 | `ip_forward = 1`, les 5 regles de `FORWARD` i la de `MASQUERADE` | `ip_forward = 1`, les 5 regles de `FORWARD` i la de `MASQUERADE` |
+| P40 | DHCP i DNS arrenquen sols | D-N01 | `active` i `enabled` | `active` i `enabled` |
+| P41 | MySQL arrenca sol | B-N01 | `active` i `enabled` | `active` i `enabled` |
+| P42 | Apache arrenca sol | W-N01 | `active` i `enabled` | `active` i `enabled` |
+| P43 | vsftpd arrenca sol | F-N01 | `active` i `enabled` | `active` i `enabled` |
 
 ![Reinici R-N01](img/proves/proves-fig12-reinici-r-n01.png)
 
@@ -336,10 +336,3 @@ La concessió del DHCP dura 10 minuts (`default-lease-time 600`). Per tant, si D
 | Rendiment | P35–P38 | 0 | 4 |
 | Disponibilitat | P39–P43 | 0 | 5 |
 | **Total** | **43** | **16** | **27** |
-
-### Incidències detectades durant les proves
-
-| Incidència | Causa | Solució |
-|---|---|---|
-| B-N01 no podia fer ping a W-N01 | La resposta de W-N01 sortia per l'adaptador de la VPN, perquè la ruta `10.0.0.0/14` de la VPN inclou les 10.3.2.x | Ruta explícita `10.3.2.0/24 via 10.3.1.1` al netplan de W-N01 |
-| El comptador del NAT es quedava a 0 | W-N01 encara tenia la ruta per defecte per la Default | Ruta per defecte via 10.3.1.1 |
