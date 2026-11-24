@@ -236,7 +236,7 @@ dig B-N01.g03.intra | grep "Query time"
 dig www.google.com | grep "Query time"
 
 # W-N01: temps d'una consulta a MySQL
-time mysql -h 10.3.2.10 -u appweb -p equipaments -e "SELECT COUNT(*) FROM equipaments_educacio;"
+time mysql -h 10.3.2.10 -u appweb -pappweb121 equipaments -e "SELECT COUNT(*) FROM equipaments_educacio;"
 ```
 
 | ID | Prova | Límit | Obtingut | Compleix |
@@ -292,11 +292,23 @@ systemctl is-active vsftpd;  systemctl is-enabled vsftpd
 
 ![Reinici R-N01](img/proves/proves-fig12-reinici-r-n01.png)
 
-*Configuració del router després de reiniciar.*
+*Configuració de R-N01 després de reiniciar.*
 
-![Reinici dels servidors](img/proves/proves-fig13-reinici-serveis.png)
+![Reinici dels servidors](img/proves/proves-reinici-dns-dhcp.png)
 
-*Estat dels serveis després de reiniciar cada servidor.*
+*Configuració de D-N01 després de reiniciar.*
+
+![Reinici dels servidors](img/proves/proves-reinici-mysql.png)
+
+*Configuració de B-N01 després de reiniciar.*
+
+![Reinici dels servidors](img/proves/proves-reinici-apache.png)
+
+*Configuració de W-N01 després de reiniciar.*
+
+![Reinici dels servidors](img/proves/proves-reinici-vsftpd.png)
+
+*Configuració de F-N01 després de reiniciar.*
 
 ### Punts únics de fallada
 
