@@ -14,12 +14,14 @@ La màquina s'ha creat a IsardVDI a partir de la plantilla **Ubuntu Server 24.04
 
 ### Adaptadors de xarxa
 
-| Adaptador | Xarxa d'Isard | Interfície | Ús |
-|---|---|---|---|
-| 1 | ASIXC2-ITB13 | `enp1s0` | DMZ. IP fixa 10.3.1.20/24, gateway 10.3.1.1 (R-N01) |
-| 2 | Wireguard VPN | `enp2s0` | Accés d'administració. Rep IP per DHCP de la xarxa VPN d'Isard |
+| Adaptador | Xarxa d'Isard | MAC | Interfície | Ús |
+|---|---|---|---|---|
+| 1 | ASIXC2-ITB13 | 52:54:00:57:50:ff | `enp1s0` | DMZ. IP fixa 10.3.1.20/24, gateway 10.3.1.1 (R-N01) |
+| 2 | Wireguard VPN | *pendent* | `enp2s0` | Accés d'administració des de fora d'Isard. IP per DHCP de la VPN |
 
-> Durant el Sprint 1, la màquina tenia també la interfície **Default** d'Isard per instal·lar paquets abans que R-N01 funcionés. Es va treure quan el router va estar operatiu, perquè la DMZ ha de sortir a Internet a través de R-N01 i no directament per Isard; si no, el trànsit no passaria pel router i el tallafocs no serviria de res.
+S'han apuntat les adreces MAC perquè dins del sistema les interfícies es diuen `enp1s0`, `enp2s0`, etc. Comparant les MAC és l'única manera segura de saber quina interfície correspon a cada xarxa abans de configurar les IPs.
+
+Al principi, la màquina també tenia la interfície Default, per poder instal·lar paquets mentre R-N01 encara no funcionava. Quan el router va estar operatiu, es va treure: la DMZ ha de sortir a Internet a través de R-N01, no directament per Isard. Si es mantingués, el trànsit no passaria pel router i el tallafocs no serviria de res. En treure-la, la ITB13 va passar de dir-se `enp2s0` a `enp1s0`.
 
 ![Paràmetres de W-N01 a Isard](img/web/hardware_w-n01)
 
